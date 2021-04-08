@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-
 class Splash extends StatefulWidget {
   @override
   _SplashState createState() => _SplashState();
@@ -17,7 +16,7 @@ class _SplashState extends State<Splash> {
               height: 120,
               width: 200,
               child: Image.asset(
-                "asset/hookup4u-Logo-BP.png",
+                "asset/mantis_main_logo.png",
                 fit: BoxFit.contain,
               )),
         ));

@@ -9,9 +9,11 @@ import 'Screens/Welcome.dart';
 import 'Screens/auth/login.dart';
 import 'util/color.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitDown,
     DeviceOrientation.portraitUp,

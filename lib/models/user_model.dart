@@ -38,27 +38,29 @@ class UserModel {
   });
   factory UserModel.fromDocument(DocumentSnapshot doc) {
     // DateTime date = DateTime.parse(doc["user_DOB"]);
+
     return UserModel(
-        id: doc['userId'],
-        isBlocked: doc['isBlocked'] != null ? doc['isBlocked'] : false,
-        phoneNumber: doc['phoneNumber'],
-        name: doc['UserName'],
-        editInfo: doc['editInfo'],
-        ageRange: doc['age_range'],
-        showGender: doc['showGender'],
-        maxDistance: doc['maximum_distance'],
-        sexualOrientation: doc['sexualOrientation']['orientation'] ?? "",
+        id: doc.data()['userId'],
+        isBlocked:
+            doc.data()['isBlocked'] != null ? doc.data()['isBlocked'] : false,
+        phoneNumber: doc.data()['phoneNumber'],
+        name: doc.data()['UserName'],
+        editInfo: doc.data()['editInfo'],
+        ageRange: doc.data()['age_range'],
+        showGender: doc.data()['showGender'],
+        maxDistance: doc.data()['maximum_distance'],
+        sexualOrientation: doc.data()['sexualOrientation']['orientation'] ?? "",
         age: ((DateTime.now()
-                    .difference(DateTime.parse(doc["user_DOB"]))
+                    .difference(DateTime.parse(doc.data()["user_DOB"]))
                     .inDays) /
                 365.2425)
             .truncate(),
-        address: doc['location']['address'],
-        coordinates: doc['location'],
+        address: doc.data()['location']['address'],
+        coordinates: doc.data()['location'],
         // university: doc['editInfo']['university'],
-        imageUrl: doc['Pictures'] != null
-            ? List.generate(doc['Pictures'].length, (index) {
-                return doc['Pictures'][index];
+        imageUrl: doc.data()['Pictures'] != null
+            ? List.generate(doc.data()['Pictures'].length, (index) {
+                return doc.data()['Pictures'][index];
               })
             : []);
   }

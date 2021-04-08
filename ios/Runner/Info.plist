@@ -28,16 +28,16 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>com.googleusercontent.apps.*************5col</string>
-				<string>fb000000000000</string>
+				<string>fb4159413450744988</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>FacebookAppID</key>
-	<string>000000000000</string>
+	<string>4159413450744988</string>
 	<key>FacebookDisplayName</key>
-	<string>Hookup4u</string>
+	<string>Mantis Social</string>
 	<key>LSApplicationCategoryType</key>
 	<string>The iOS Simulator deployment target &apos;IPHONEOS_DEPLOYMENT_TARGET&apos; is set to 7.0, but the range of supported deployment target versions is 8.0 to 13.2.99.</string>
 	<key>LSRequiresIPhoneOS</key>

@@ -673,7 +673,7 @@ class _ChatPageState extends State<ChatPage> {
       });
 
       // push video page with given channel name
-      /*
+
       await Navigator.push(
         context,
         MaterialPageRoute(
@@ -683,7 +683,6 @@ class _ChatPageState extends State<ChatPage> {
               callType: callType),
         ),
       );
-      */
     } else {
       CustomSnackbar.snackbar("Blocked !", _scaffoldKey);
     }

@@ -21,7 +21,7 @@ class BlockUser extends StatelessWidget {
                       height: 50,
                       width: 100,
                       child: Image.asset(
-                        "asset/hookup4u-Logo-BP.png",
+                        "asset/mantis_main_logo.png",
                         fit: BoxFit.contain,
                       )),
                 )),

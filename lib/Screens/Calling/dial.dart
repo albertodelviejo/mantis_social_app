@@ -1,4 +1,3 @@
-/*
 import 'package:agora_rtc_engine/rtc_engine.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -11,7 +10,7 @@ import 'call.dart';
 
 class DialCall extends StatefulWidget {
   final String channelName;
-  final User receiver;
+  final UserModel receiver;
   final String callType;
   const DialCall({@required this.channelName, this.receiver, this.callType});
 
@@ -22,7 +21,7 @@ class DialCall extends StatefulWidget {
 class _DialCallState extends State<DialCall> {
   bool ispickup = false;
   //final db = Firestore.instance;
-  CollectionReference callRef = Firestore.instance.collection("calls");
+  CollectionReference callRef = FirebaseFirestore.instance.collection("calls");
   @override
   void initState() {
     _addCallingData();
@@ -30,8 +29,8 @@ class _DialCallState extends State<DialCall> {
   }
 
   _addCallingData() async {
-    await callRef.document(widget.channelName).delete();
-    await callRef.document(widget.channelName).setData({
+    await callRef.doc(widget.channelName).delete();
+    await callRef.doc(widget.channelName).set({
       'callType': widget.callType,
       'calling': true,
       'response': "Awaiting",
@@ -45,8 +44,8 @@ class _DialCallState extends State<DialCall> {
     super.dispose();
     ispickup = true;
     await callRef
-        .document(widget.channelName)
-        .setData({'calling': false}, merge: true);
+        .doc(widget.channelName)
+        .set({'calling': false}, SetOptions(merge: true));
   }
 
   @override
@@ -63,15 +62,15 @@ class _DialCallState extends State<DialCall> {
                 Future.delayed(Duration(seconds: 30), () async {
                   if (!ispickup) {
                     await callRef
-                        .document(widget.channelName)
-                        .updateData({'response': 'Not-answer'});
+                        .doc(widget.channelName)
+                        .update({'response': 'Not-answer'});
                   }
                 });
                 if (!snapshot.hasData) {
                   return Container();
                 } else
                   try {
-                    switch (snapshot.data.documents[0]['response']) {
+                    switch (snapshot.data.docs[0]['response']) {
                       case "Awaiting":
                         {
                           return Column(
@@ -131,10 +130,9 @@ class _DialCallState extends State<DialCall> {
                                     style: TextStyle(color: Colors.white),
                                   ),
                                   onPressed: () async {
-                                    await callRef
-                                        .document(widget.channelName)
-                                        .setData({'response': "Call_Cancelled"},
-                                            merge: true);
+                                    await callRef.doc(widget.channelName).set(
+                                        {'response': "Call_Cancelled"},
+                                        SetOptions(merge: true));
                                     // Navigator.pop(context);
                                   })
                             ],
@@ -227,4 +225,3 @@ class _DialCallState extends State<DialCall> {
     );
   }
 }
-*/

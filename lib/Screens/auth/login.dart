@@ -279,8 +279,8 @@ our Privacy Policy and Cookies Policy.""",
     );
   }
 
-  Future<FirebaseUser> handleFacebookLogin(context) async {
-    FirebaseUser user;
+  Future<User> handleFacebookLogin(context) async {
+    User user;
     String result = await Navigator.push(
       context,
       MaterialPageRoute(
