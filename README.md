@@ -1,4 +1,4 @@
-# hookup4u
+# Mantis Social
 
 A new Flutter application.
 
