@@ -597,10 +597,10 @@ class _SettingsState extends State<Settings> {
                   ),
                   onPressed: () async {
                     Navigator.pop(context);
-                    await Firestore.instance
+                    await FirebaseFirestore.instance
                         .collection("Users")
-                        .document('${widget.currentUser.id}')
-                        .updateData({
+                        .doc('${widget.currentUser.id}')
+                        .update({
                           'location': {
                             'latitude': _address['latitude'],
                             'longitude': _address['longitude'],
@@ -662,7 +662,7 @@ class _SettingsState extends State<Settings> {
         });
   }
 
-  Future _deleteUser(FirebaseUser user) async {
-    await Firestore.instance.collection("Users").document(user.uid).delete();
+  Future _deleteUser(User user) async {
+    await FirebaseFirestore.instance.collection("Users").doc(user.uid).delete();
   }
 }

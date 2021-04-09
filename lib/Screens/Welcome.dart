@@ -137,7 +137,7 @@ class _WelcomeState extends State<Welcome> {
                               fontWeight: FontWeight.bold),
                         ))),
                     onTap: () async {
-                      User _user = await FirebaseAuth.instance.currentUser;
+                      User _user = FirebaseAuth.instance.currentUser;
                       if (_user.displayName != null) {
                         if (_user.displayName.length > 0) {
                           Navigator.push(

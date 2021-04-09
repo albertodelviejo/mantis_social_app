@@ -377,7 +377,7 @@ class _ChatPageState extends State<ChatPage> {
   }
 
   generateMessages(AsyncSnapshot<QuerySnapshot> snapshot) {
-    return snapshot.data.documents
+    return snapshot.data.docs
         .map<Widget>((doc) => Container(
               margin: const EdgeInsets.symmetric(vertical: 10.0),
               child: new Row(

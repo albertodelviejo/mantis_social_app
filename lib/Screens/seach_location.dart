@@ -14,7 +14,8 @@ class SearchLocation extends StatefulWidget {
 }
 
 //Add here your mapbox token under ""
-String mapboxApi = "<----- Add here your mapbox token-->";
+String mapboxApi =
+    "pk.eyJ1IjoiZmx1dHRlcmxhYiIsImEiOiJja245ODZ2amQwemhvMnBuenR3cjc2ajZoIn0.kf7BoyTvD7QpBSXO30D-rw";
 
 class _SearchLocationState extends State<SearchLocation> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();

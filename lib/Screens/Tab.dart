@@ -363,11 +363,11 @@ class TabbarState extends State<Tabbar> {
 
   getLikedByList() {
     docRef
-        .document(currentUser.id)
+        .doc(currentUser.id)
         .collection("LikedBy")
         .snapshots()
         .listen((data) async {
-      likedByList.addAll(data.documents.map((f) => f['LikedBy']));
+      likedByList.addAll(data.docs.map((f) => f['LikedBy']));
     });
   }
 

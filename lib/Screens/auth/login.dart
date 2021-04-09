@@ -13,10 +13,10 @@ import '../../util/color.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Login extends StatelessWidget {
-  static const your_client_id = '000000000000';
+  static const your_client_id = '4159413450744988';
   final FirebaseAuth _auth = FirebaseAuth.instance;
   static const your_redirect_url =
-      'https://hookup4******firebaseapp.com/__/auth/handler';
+      'https://mantis-social.firebaseapp.com/__/auth/handler';
 
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
@@ -72,9 +72,12 @@ class Login extends StatelessWidget {
                           SizedBox(
                             height: 15,
                           ),
-                          Image.asset(
-                            "asset/hookup4u-Logo-BW.png",
-                            fit: BoxFit.contain,
+                          SizedBox(
+                            height: 175,
+                            child: Image.asset(
+                              "asset/mantis_main_logo.png",
+                              fit: BoxFit.contain,
+                            ),
                           ),
                         ],
                       ),
@@ -167,7 +170,7 @@ our Privacy Policy and Cookies Policy.""",
                           cornerRadius: 50,
                           type: i.ButtonType.defaultButton,
                           onPressed: () async {
-                            final FirebaseUser currentUser =
+                            final User currentUser =
                                 await handleAppleLogin().catchError((onError) {
                               SnackBar snackBar =
                                   SnackBar(content: Text(onError));
@@ -175,7 +178,7 @@ our Privacy Policy and Cookies Policy.""",
                             });
                             if (currentUser != null) {
                               print(
-                                  'usernaem ${currentUser.displayName} \n photourl ${currentUser.photoUrl}');
+                                  'usernaem ${currentUser.displayName} \n photourl ${currentUser.photoURL}');
                               // await _setDataUser(currentUser);
                               navigationCheck(currentUser, context);
                             }

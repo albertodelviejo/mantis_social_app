@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mantissocial/util/university_suggestions_en.dart';
 import '../util/color.dart';
 import 'AllowLocation.dart';
+import 'package:autocomplete_textfield/autocomplete_textfield.dart';
 
 class University extends StatefulWidget {
   final Map<String, dynamic> userData;
@@ -13,6 +15,7 @@ class University extends StatefulWidget {
 
 class _UniversityState extends State<University> {
   String university = '';
+  GlobalKey<AutoCompleteTextFieldState<String>> key = new GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +64,9 @@ class _UniversityState extends State<University> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 30),
                 child: Container(
-                  child: TextFormField(
+                  child: SimpleAutoCompleteTextField(
+                    key: key,
+                    suggestions: suggestions,
                     style: TextStyle(fontSize: 23),
                     decoration: InputDecoration(
                       hintText: "Enter your university name",
@@ -71,7 +76,7 @@ class _UniversityState extends State<University> {
                       helperStyle:
                           TextStyle(color: secondryColor, fontSize: 15),
                     ),
-                    onChanged: (value) {
+                    textChanged: (value) {
                       setState(() {
                         university = value;
                       });

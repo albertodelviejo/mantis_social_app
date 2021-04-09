@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import '../Tab.dart';
 import 'otp.dart';
 import '../../util/color.dart';
@@ -237,12 +236,12 @@ class _VerificationState extends State<Verification> {
                                       ],
                                     )));
                           });
-                      Firestore.instance
+                      FirebaseFirestore.instance
                           .collection('Users')
                           .where('userId', isEqualTo: authResult.user.uid)
-                          .getDocuments()
+                          .get()
                           .then((QuerySnapshot snapshot) async {
-                        if (snapshot.documents.length <= 0) {
+                        if (snapshot.docs.length <= 0) {
                           await setDataUser(authResult.user);
                         }
                       });

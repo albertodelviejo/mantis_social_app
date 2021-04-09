@@ -9,7 +9,7 @@ import '../../util/color.dart';
 import 'package:intl/intl.dart';
 
 class RecentChats extends StatelessWidget {
-  final db = Firestore.instance;
+  final db = FirebaseFirestore.instance;
   final UserModel currentUser;
   final List<UserModel> matches;
 
@@ -48,7 +48,7 @@ class RecentChats extends StatelessWidget {
                             child: StreamBuilder(
                                 stream: db
                                     .collection("chats")
-                                    .document(chatId(currentUser, index))
+                                    .doc(chatId(currentUser, index))
                                     .collection('messages')
                                     .orderBy('time', descending: true)
                                     .snapshots(),
