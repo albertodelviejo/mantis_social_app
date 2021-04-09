@@ -9,7 +9,7 @@ class UserModel {
   final Map coordinates;
   final List sexualOrientation;
   final String gender;
-  final String showGender;
+  final List showGender;
   final int age;
   final String phoneNumber;
   int maxDistance;

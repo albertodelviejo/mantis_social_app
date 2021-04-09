@@ -296,7 +296,7 @@ class TabbarState extends State<Tabbar> {
   }
 
   query() {
-    if (currentUser.showGender == 'everyone') {
+    if (currentUser.showGender.contains('everyone')) {
       return docRef
           .where(
             'age',
@@ -307,7 +307,7 @@ class TabbarState extends State<Tabbar> {
           .orderBy('age', descending: false);
     } else {
       return docRef
-          .where('editInfo.userGender', isEqualTo: currentUser.showGender)
+          .where('editInfo.userGender', whereIn: currentUser.showGender)
           .where(
             'age',
             isGreaterThanOrEqualTo: int.parse(currentUser.ageRange['min']),

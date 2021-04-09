@@ -15,6 +15,7 @@ class ShowGender extends StatefulWidget {
 class _ShowGenderState extends State<ShowGender> {
   bool man = false;
   bool woman = false;
+  bool transgender = false;
   bool eyeryone = false;
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
@@ -78,9 +79,15 @@ class _ShowGenderState extends State<ShowGender> {
                       borderRadius: BorderRadius.circular(25)),
                   onPressed: () {
                     setState(() {
-                      woman = false;
-                      man = true;
-                      eyeryone = false;
+                      // woman = false;
+                      if (man) {
+                        man = false;
+                      } else {
+                        man = true;
+                      }
+
+                      // eyeryone = false;
+                      // transgender = false;
                     });
                   },
                 ),
@@ -106,9 +113,54 @@ class _ShowGenderState extends State<ShowGender> {
                         borderRadius: BorderRadius.circular(25)),
                     onPressed: () {
                       setState(() {
-                        woman = true;
-                        man = false;
-                        eyeryone = false;
+                        if (woman) {
+                          woman = false;
+                        } else {
+                          woman = true;
+                        }
+
+                        //  man = false;
+                        //  eyeryone = false;
+                        //  transgender = false;
+                      });
+                      // Navigator.push(
+                      //     context, CupertinoPageRoute(builder: (context) => OTP()));
+                    },
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 10.0),
+                  child: OutlineButton(
+                    child: Container(
+                      height: MediaQuery.of(context).size.height * .065,
+                      width: MediaQuery.of(context).size.width * .75,
+                      child: Center(
+                          child: Text("TRANSGENDER",
+                              style: TextStyle(
+                                  fontSize: 20,
+                                  color: transgender
+                                      ? primaryColor
+                                      : secondryColor,
+                                  fontWeight: FontWeight.bold))),
+                    ),
+                    borderSide: BorderSide(
+                      color: transgender ? primaryColor : secondryColor,
+                      width: 1,
+                      style: BorderStyle.solid,
+                    ),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25)),
+                    onPressed: () {
+                      setState(() {
+                        //woman = false;
+                        //man = false;
+                        if (transgender) {
+                          transgender = false;
+                        } else {
+                          transgender = true;
+                        }
+
+                        //eyeryone = false;
                       });
                       // Navigator.push(
                       //     context, CupertinoPageRoute(builder: (context) => OTP()));
@@ -138,7 +190,12 @@ class _ShowGenderState extends State<ShowGender> {
                     setState(() {
                       woman = false;
                       man = false;
-                      eyeryone = true;
+                      if (eyeryone) {
+                        eyeryone = false;
+                      } else {
+                        eyeryone = true;
+                      }
+                      transgender = false;
                     });
                     // Navigator.push(
                     //     context, CupertinoPageRoute(builder: (context) => OTP()));
@@ -147,7 +204,7 @@ class _ShowGenderState extends State<ShowGender> {
               ],
             ),
           ),
-          man || woman || eyeryone
+          man || woman || transgender || eyeryone
               ? Padding(
                   padding: const EdgeInsets.only(bottom: 40),
                   child: Align(
@@ -177,13 +234,24 @@ class _ShowGenderState extends State<ShowGender> {
                                 fontWeight: FontWeight.bold),
                           ))),
                       onTap: () {
+                        var showGenderList = [];
                         if (man) {
-                          widget.userData.addAll({'showGender': "man"});
-                        } else if (woman) {
-                          widget.userData.addAll({'showGender': "woman"});
-                        } else {
-                          widget.userData.addAll({'showGender': "everyone"});
+                          showGenderList.add("man");
                         }
+
+                        if (woman) {
+                          showGenderList.add("woman");
+                        }
+
+                        if (transgender) {
+                          showGenderList.add("transgender");
+                        }
+
+                        if (eyeryone) {
+                          showGenderList.add("everyone");
+                        }
+
+                        widget.userData.addAll({'showGender': showGenderList});
 
                         print(widget.userData);
                         Navigator.push(

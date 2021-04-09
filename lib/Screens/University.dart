@@ -65,6 +65,11 @@ class _UniversityState extends State<University> {
                 padding: const EdgeInsets.symmetric(horizontal: 30),
                 child: Container(
                   child: SimpleAutoCompleteTextField(
+                    textSubmitted: (value) {
+                      setState(() {
+                        university = value;
+                      });
+                    },
                     key: key,
                     suggestions: suggestions,
                     style: TextStyle(fontSize: 23),

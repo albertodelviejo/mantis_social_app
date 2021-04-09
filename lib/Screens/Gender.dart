@@ -16,6 +16,7 @@ class Gender extends StatefulWidget {
 class _GenderState extends State<Gender> {
   bool man = false;
   bool woman = false;
+  bool transgender = false;
   bool other = false;
   bool select = false;
   final _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -83,6 +84,7 @@ class _GenderState extends State<Gender> {
                     setState(() {
                       woman = false;
                       man = true;
+                      transgender = false;
                       other = false;
                     });
                   },
@@ -111,6 +113,39 @@ class _GenderState extends State<Gender> {
                       setState(() {
                         woman = true;
                         man = false;
+                        transgender = false;
+                        other = false;
+                      });
+                      // Navigator.push(
+                      //     context, CupertinoPageRoute(builder: (context) => OTP()));
+                    },
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 10),
+                  child: OutlineButton(
+                    child: Container(
+                      height: MediaQuery.of(context).size.height * .065,
+                      width: MediaQuery.of(context).size.width * .75,
+                      child: Center(
+                          child: Text("TRANSGENDER",
+                              style: TextStyle(
+                                  fontSize: 20,
+                                  color: transgender ? primaryColor : secondryColor,
+                                  fontWeight: FontWeight.bold))),
+                    ),
+                    borderSide: BorderSide(
+                      color: transgender ? primaryColor : secondryColor,
+                      width: 1,
+                      style: BorderStyle.solid,
+                    ),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25)),
+                    onPressed: () {
+                      setState(() {
+                        woman = false;
+                        man = false;
+                        transgender = true;
                         other = false;
                       });
                       // Navigator.push(
@@ -141,6 +176,7 @@ class _GenderState extends State<Gender> {
                     setState(() {
                       woman = false;
                       man = false;
+                      transgender = false;
                       other = true;
                     });
                     // Navigator.push(
@@ -168,7 +204,7 @@ class _GenderState extends State<Gender> {
               ),
             ),
           ),
-          man || woman || other
+          man || woman || transgender || other
               ? Padding(
                   padding: const EdgeInsets.only(bottom: 40),
                   child: Align(
@@ -207,6 +243,11 @@ class _GenderState extends State<Gender> {
                         } else if (woman) {
                           userGender = {
                             'userGender': "woman",
+                            'showOnProfile': select
+                          };
+                        } else if (transgender) {
+                          userGender = {
+                            'userGender': "transgender",
                             'showOnProfile': select
                           };
                         } else {
