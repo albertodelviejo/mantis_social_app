@@ -11,7 +11,9 @@ dependencies:
     sdk: flutter
   agora_rtc_engine: ^3.3.2
   apple_sign_in: ^0.1.0
+  autocomplete_textfield: ^1.7.3
   cached_network_image: ^2.4.0
+  checkbox_grouped: ^0.6.1
   cloud_firestore: ^0.14.3+1
   country_code_picker: ^2.0.1
   cupertino_icons: ^1.0.2
@@ -38,7 +40,6 @@ dependencies:
   shimmer: ^1.1.2
   swipe_stack: ^1.0.0
   url_launcher: ^6.0.3
-  autocomplete_textfield: ^1.7.3
 
 dev_dependencies:
   flutter_test:

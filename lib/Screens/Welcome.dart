@@ -31,7 +31,7 @@ class _WelcomeState extends State<Welcome> {
                           height: 150,
                         ),
                         Text(
-                          "hookup4u",
+                          "Mantis Social",
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               fontSize: 35,
@@ -42,7 +42,7 @@ class _WelcomeState extends State<Welcome> {
                         ListTile(
                           contentPadding: EdgeInsets.all(8),
                           title: Text(
-                            "Welcome to hookup4u.\nPlease follow these House Rules.",
+                            "Welcome to Mantis Social.\nPlease follow these House Rules.",
                             style: TextStyle(
                                 fontSize: 18, fontWeight: FontWeight.bold),
                           ),

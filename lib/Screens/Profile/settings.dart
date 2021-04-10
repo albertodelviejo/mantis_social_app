@@ -255,31 +255,101 @@ class _SettingsState extends State<Settings> {
                                 fontWeight: FontWeight.w500),
                           ),
                           ListTile(
-                            title: DropdownButton(
-                              iconEnabledColor: primaryColor,
-                              iconDisabledColor: secondryColor,
-                              isExpanded: true,
-                              items: [
-                                DropdownMenuItem(
-                                  child: Text("Man"),
-                                  value: "man",
-                                ),
-                                DropdownMenuItem(
-                                    child: Text("Woman"), value: "woman"),
-                                DropdownMenuItem(
-                                    child: Text("Everyone"), value: "everyone"),
-                              ],
-                              onChanged: (val) {
-                                changeValues.addAll({
-                                  'showGender': val,
-                                });
-                                setState(() {
-                                  _showMe = val;
-                                });
-                              },
-                              value: _showMe,
-                            ),
-                          ),
+                              title: Row(
+                            children: [
+                              Checkbox(
+                                  value: _showMe.contains("man"),
+                                  onChanged: (isSelected) {
+                                    setState(() {
+                                      if (isSelected) {
+                                        _showMe.add("man");
+                                        if (_showMe.contains("everyone")) {
+                                          _showMe.remove("everyone");
+                                        }
+                                      } else {
+                                        if (_showMe.length > 1) {
+                                          _showMe.remove("man");
+                                        }
+                                      }
+                                      changeValues
+                                          .addAll({'showGender': _showMe});
+                                    });
+                                  }),
+                              Text("Man")
+                            ],
+                          )),
+                          ListTile(
+                              title: Row(
+                            children: [
+                              Checkbox(
+                                  value: _showMe.contains("woman"),
+                                  onChanged: (isSelected) {
+                                    setState(() {
+                                      if (isSelected) {
+                                        _showMe.add("woman");
+                                        if (_showMe.contains("everyone")) {
+                                          _showMe.remove("everyone");
+                                        }
+                                      } else {
+                                        if (_showMe.length > 1) {
+                                          _showMe.remove("woman");
+                                        }
+                                      }
+                                      changeValues
+                                          .addAll({'showGender': _showMe});
+                                    });
+                                  }),
+                              Text("Woman")
+                            ],
+                          )),
+                          ListTile(
+                              title: Row(
+                            children: [
+                              Checkbox(
+                                  value: _showMe.contains("transgender"),
+                                  onChanged: (isSelected) {
+                                    setState(() {
+                                      if (isSelected) {
+                                        _showMe.add("transgender");
+                                        if (_showMe.contains("everyone")) {
+                                          _showMe.remove("everyone");
+                                        }
+                                      } else {
+                                        if (_showMe.length > 1) {
+                                          _showMe.remove("transgender");
+                                        }
+                                      }
+                                      changeValues
+                                          .addAll({'showGender': _showMe});
+                                    });
+                                  }),
+                              Text("Transgender")
+                            ],
+                          )),
+                          ListTile(
+                              title: Row(
+                            children: [
+                              Checkbox(
+                                  value: _showMe.contains("everyone"),
+                                  onChanged: (isSelected) {
+                                    setState(() {
+                                      if (isSelected) {
+                                        _showMe.add("everyone");
+                                        _showMe.remove("man");
+                                        _showMe.remove("woman");
+                                        _showMe.remove("transgender");
+                                      } else {
+                                        if (_showMe.length > 1) {
+                                          _showMe.remove("everyone");
+                                        }
+                                      }
+                                      changeValues
+                                          .addAll({'showGender': _showMe});
+                                    });
+                                  }),
+                              Text("Everyone")
+                            ],
+                          ))
                         ],
                       ),
                     ),

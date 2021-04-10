@@ -34,7 +34,7 @@ final List adds = [
     'icon': Icons.location_on,
     'color': Colors.purple,
     'title': "Swipe around the world",
-    'subtitle': "Passport to anywhere with hookup4u",
+    'subtitle': "Passport to anywhere with Mantis Social",
   },
   {
     'icon': Icons.vpn_key,

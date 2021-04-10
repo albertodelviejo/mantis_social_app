@@ -486,7 +486,8 @@ class _SubscriptionState extends State<Subscription> {
                       style: TextStyle(color: Colors.blue),
                     ),
                     onTap: () => launch(
-                        "https://www.deligence.com/apps/hookup4u/Privacy-Policy.html"), //TODO: add privacy policy
+                      "https://www.deligence.com/apps/hookup4u/Privacy-Policy.html",
+                    ), //TODO: add privacy policy
                   ),
                   GestureDetector(
                     child: Text(
@@ -494,7 +495,8 @@ class _SubscriptionState extends State<Subscription> {
                       style: TextStyle(color: Colors.blue),
                     ),
                     onTap: () => launch(
-                        "https://www.deligence.com/apps/hookup4u/Terms-Service.html"), //TODO: add Terms and conditions
+                      "https://www.deligence.com/apps/hookup4u/Terms-Service.html",
+                    ), //TODO: add Terms and conditions
                   ),
                 ],
               ),
