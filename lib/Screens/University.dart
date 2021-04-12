@@ -15,6 +15,7 @@ class University extends StatefulWidget {
 
 class _UniversityState extends State<University> {
   String university = '';
+  TextEditingController textEditingController = new TextEditingController();
   GlobalKey<AutoCompleteTextFieldState<String>> key = new GlobalKey();
 
   @override
@@ -65,13 +66,9 @@ class _UniversityState extends State<University> {
                 padding: const EdgeInsets.symmetric(horizontal: 30),
                 child: Container(
                   child: SimpleAutoCompleteTextField(
-                    textSubmitted: (value) {
-                      setState(() {
-                        university = value;
-                      });
-                    },
                     key: key,
                     suggestions: suggestions,
+                    controller: textEditingController,
                     style: TextStyle(fontSize: 23),
                     decoration: InputDecoration(
                       hintText: "Enter your university name",
@@ -119,12 +116,22 @@ class _UniversityState extends State<University> {
                                     fontWeight: FontWeight.bold),
                               ))),
                           onTap: () {
+                            university = textEditingController.value.text;
                             widget.userData.addAll({
                               'editInfo': {
                                 'university': "$university",
                                 'userGender': widget.userData['userGender'],
                                 'showOnProfile':
-                                    widget.userData['showOnProfile']
+                                    widget.userData['showOnProfile'],
+                                'facebook_url': widget.userData['facebook_url'],
+                                'instagram_url':
+                                    widget.userData['instagram_url'],
+                                'line_url': widget.userData['line_url'],
+                                'snapchat_url': widget.userData['snapchat_url'],
+                                'tiktok_url': widget.userData['tiktok_url'],
+                                'twitter_url': widget.userData['twitter_url'],
+                                'wechat_url': widget.userData['wechat_url'],
+                                'whatsapp_url': widget.userData['whatsapp_url'],
                               }
                             });
                             widget.userData.remove('showOnProfile');

@@ -27,6 +27,14 @@ class EditProfileState extends State<EditProfile> {
   final TextEditingController livingCtlr = new TextEditingController();
   final TextEditingController jobCtlr = new TextEditingController();
   final TextEditingController universityCtlr = new TextEditingController();
+  final TextEditingController facebookCtlr = new TextEditingController();
+  final TextEditingController instagramCtlr = new TextEditingController();
+  final TextEditingController tiktokCtlr = new TextEditingController();
+  final TextEditingController twitterCtlr = new TextEditingController();
+  final TextEditingController lineCtlr = new TextEditingController();
+  final TextEditingController whatsappCtlr = new TextEditingController();
+  final TextEditingController snapchatCtlr = new TextEditingController();
+  final TextEditingController wechatCtlr = new TextEditingController();
   bool visibleAge = false;
   bool visibleDistance = true;
 
@@ -42,6 +50,14 @@ class EditProfileState extends State<EditProfile> {
     livingCtlr.text = widget.currentUser.editInfo['living_in'];
     universityCtlr.text = widget.currentUser.editInfo['university'];
     jobCtlr.text = widget.currentUser.editInfo['job_title'];
+    instagramCtlr.text = widget.currentUser.editInfo['instagram_url'];
+    facebookCtlr.text = widget.currentUser.editInfo['facebook_url'];
+    tiktokCtlr.text = widget.currentUser.editInfo['tiktok_url'];
+    twitterCtlr.text = widget.currentUser.editInfo['twitter_url'];
+    lineCtlr.text = widget.currentUser.editInfo['line_url'];
+    whatsappCtlr.text = widget.currentUser.editInfo['whatsapp_url'];
+    snapchatCtlr.text = widget.currentUser.editInfo['snapchat_url'];
+    wechatCtlr.text = widget.currentUser.editInfo['wechat_url'];
     setState(() {
       showMe = widget.currentUser.editInfo['userGender'];
       visibleAge = widget.currentUser.editInfo['showMyAge'] ?? false;
@@ -497,13 +513,15 @@ class EditProfileState extends State<EditProfile> {
                           ),
                         ),
                         ListTile(
-                          title: Text(
-                            "Company",
-                            style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                fontSize: 16,
-                                color: Colors.black87),
-                          ),
+                          title: Padding(
+                              padding: const EdgeInsets.only(bottom: 5.0),
+                              child: Text(
+                                "Company",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 16,
+                                    color: Colors.black87),
+                              )),
                           subtitle: CupertinoTextField(
                             controller: companyCtlr,
                             cursorColor: primaryColor,
@@ -515,12 +533,15 @@ class EditProfileState extends State<EditProfile> {
                           ),
                         ),
                         ListTile(
-                          title: Text(
-                            "University",
-                            style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                fontSize: 16,
-                                color: Colors.black87),
+                          title: Padding(
+                            padding: const EdgeInsets.only(bottom: 5.0),
+                            child: Text(
+                              "University",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 16,
+                                  color: Colors.black87),
+                            ),
                           ),
                           subtitle: CupertinoTextField(
                             controller: universityCtlr,
@@ -533,13 +554,15 @@ class EditProfileState extends State<EditProfile> {
                           ),
                         ),
                         ListTile(
-                          title: Text(
-                            "Living in",
-                            style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                fontSize: 16,
-                                color: Colors.black87),
-                          ),
+                          title: Padding(
+                              padding: const EdgeInsets.only(bottom: 5.0),
+                              child: Text(
+                                "Living in",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 16,
+                                    color: Colors.black87),
+                              )),
                           subtitle: CupertinoTextField(
                             controller: livingCtlr,
                             cursorColor: primaryColor,
@@ -582,6 +605,190 @@ class EditProfileState extends State<EditProfile> {
                               },
                               value: showMe,
                             ),
+                          ),
+                        ),
+                        ListTile(
+                          title: Padding(
+                              padding: const EdgeInsets.only(bottom: 5.0),
+                              child: Text(
+                                "Instagram",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 16,
+                                    color: Colors.black87),
+                              )),
+                          subtitle: CupertinoTextField(
+                            controller: instagramCtlr,
+                            cursorColor: primaryColor,
+                            placeholder: "Instagram profile",
+                            padding: EdgeInsets.all(10),
+                            onChanged: (text) {
+                              bool _validURL = Uri.parse(text).isAbsolute;
+                              if (_validURL|| text == "") {
+                                editInfo.addAll({'instagram_url': text});
+                              }
+                            },
+                          ),
+                        ),
+                        ListTile(
+                          title: Padding(
+                              padding: const EdgeInsets.only(bottom: 5.0),
+                              child: Text(
+                                "Facebook",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 16,
+                                    color: Colors.black87),
+                              )),
+                          subtitle: CupertinoTextField(
+                            controller: facebookCtlr,
+                            cursorColor: primaryColor,
+                            placeholder: "Facebook profile",
+                            padding: EdgeInsets.all(10),
+                            onChanged: (text) {
+                              bool _validURL = Uri.parse(text).isAbsolute;
+                              if (_validURL|| text == "") {
+                                editInfo.addAll({'facebook_url': text});
+                              }
+                            },
+                          ),
+                        ),
+                        ListTile(
+                          title: Padding(
+                              padding: const EdgeInsets.only(bottom: 5.0),
+                              child: Text(
+                                "Tiktok",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 16,
+                                    color: Colors.black87),
+                              )),
+                          subtitle: CupertinoTextField(
+                            controller: tiktokCtlr,
+                            cursorColor: primaryColor,
+                            placeholder: "Tikok profile",
+                            padding: EdgeInsets.all(10),
+                            onChanged: (text) {
+                              bool _validURL = Uri.parse(text).isAbsolute;
+                              if (_validURL|| text == "") {
+                                editInfo.addAll({'tiktok_url': text});
+                              }
+                            },
+                          ),
+                        ),
+                        ListTile(
+                          title: Padding(
+                              padding: const EdgeInsets.only(bottom: 5.0),
+                              child: Text(
+                                "Twitter",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 16,
+                                    color: Colors.black87),
+                              )),
+                          subtitle: CupertinoTextField(
+                            controller: twitterCtlr,
+                            cursorColor: primaryColor,
+                            placeholder: "Twitter profile",
+                            padding: EdgeInsets.all(10),
+                            onChanged: (text) {
+                              bool _validURL = Uri.parse(text).isAbsolute;
+                              if (_validURL|| text == "") {
+                                editInfo.addAll({'twitter_url': text});
+                              }
+                            },
+                          ),
+                        ),
+                        ListTile(
+                          title: Padding(
+                              padding: const EdgeInsets.only(bottom: 5.0),
+                              child: Text(
+                                "Line",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 16,
+                                    color: Colors.black87),
+                              )),
+                          subtitle: CupertinoTextField(
+                            controller: lineCtlr,
+                            cursorColor: primaryColor,
+                            placeholder: "Line profile",
+                            padding: EdgeInsets.all(10),
+                            onChanged: (text) {
+                              bool _validURL = Uri.parse(text).isAbsolute;
+                              if (_validURL|| text == "") {
+                                editInfo.addAll({'line_url': text});
+                              }
+                            },
+                          ),
+                        ),
+                        ListTile(
+                          title: Padding(
+                              padding: const EdgeInsets.only(bottom: 5.0),
+                              child: Text(
+                                "Whatsapp",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 16,
+                                    color: Colors.black87),
+                              )),
+                          subtitle: CupertinoTextField(
+                            controller: whatsappCtlr,
+                            cursorColor: primaryColor,
+                            placeholder: "Whatsapp number",
+                            padding: EdgeInsets.all(10),
+                            onChanged: (text) {
+                              bool _validURL = Uri.parse(text).isAbsolute;
+                              if (_validURL|| text == "") {
+                                editInfo.addAll({'whatsapp_url': text});
+                              }
+                            },
+                          ),
+                        ),
+                        ListTile(
+                          title: Padding(
+                              padding: const EdgeInsets.only(bottom: 5.0),
+                              child: Text(
+                                "Snapchat",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 16,
+                                    color: Colors.black87),
+                              )),
+                          subtitle: CupertinoTextField(
+                            controller: snapchatCtlr,
+                            cursorColor: primaryColor,
+                            placeholder: "Snapchat profile",
+                            padding: EdgeInsets.all(10),
+                            onChanged: (text) {
+                              bool _validURL = Uri.parse(text).isAbsolute;
+                              if (_validURL|| text == "") {
+                                editInfo.addAll({'snapchat_url': text});
+                              }
+                            },
+                          ),
+                        ),
+                        ListTile(
+                          title: Padding(
+                              padding: const EdgeInsets.only(bottom: 5.0),
+                              child: Text(
+                                "WeChat",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 16,
+                                    color: Colors.black87),
+                              )),
+                          subtitle: CupertinoTextField(
+                            controller: wechatCtlr,
+                            cursorColor: primaryColor,
+                            placeholder: "WeChat profile",
+                            padding: EdgeInsets.all(10),
+                            onChanged: (text) {
+                              bool _validURL = Uri.parse(text).isAbsolute;
+                              if (_validURL || text == "") {
+                                editInfo.addAll({'wechat_url': text});
+                              }
+                            },
                           ),
                         ),
                         SizedBox(
