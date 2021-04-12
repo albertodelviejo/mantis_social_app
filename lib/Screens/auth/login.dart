@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:apple_sign_in/apple_sign_in.dart' as i;
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -11,6 +12,8 @@ import 'otp.dart';
 import '../../models/custom_web_view.dart';
 import '../../util/color.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_facebook_login/flutter_facebook_login.dart';
+import 'package:http/http.dart' as http;
 
 class Login extends StatelessWidget {
   static const your_client_id = '4159413450744988';
@@ -19,6 +22,7 @@ class Login extends StatelessWidget {
       'https://mantis-social.firebaseapp.com/__/auth/handler';
 
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  final fbLogin = FacebookLogin();
 
   @override
   Widget build(BuildContext context) {
@@ -149,7 +153,8 @@ our Privacy Policy and Cookies Policy.""",
                                   ),
                                 );
                               });
-                          await handleFacebookLogin(context).then((user) {
+
+                          await signInFB().then((user) {
                             navigationCheck(user, context);
                           }).then((_) {
                             Navigator.pop(context);
@@ -282,29 +287,15 @@ our Privacy Policy and Cookies Policy.""",
     );
   }
 
-  Future<User> handleFacebookLogin(context) async {
+  Future<User> signInFB() async {
     User user;
-    String result = await Navigator.push(
-      context,
-      MaterialPageRoute(
-          builder: (context) => CustomWebView(
-                selectedUrl:
-                    'https://www.facebook.com/dialog/oauth?client_id=$your_client_id&redirect_uri=$your_redirect_url&response_type=token&scope=email,public_profile,',
-              ),
-          maintainState: true),
-    );
-    if (result != null) {
-      try {
-        final facebookAuthCred = FacebookAuthProvider.credential(result);
-        user =
-            (await FirebaseAuth.instance.signInWithCredential(facebookAuthCred))
-                .user;
+    final FacebookLoginResult result = await fbLogin.logIn(["email"]);
+    final String token = result.accessToken.token;
+    final facebookAuthCred = FacebookAuthProvider.credential(token);
 
-        print('user $user');
-      } catch (e) {
-        print('Error $e');
-      }
-    }
+    user = (await FirebaseAuth.instance.signInWithCredential(facebookAuthCred))
+        .user;
+
     return user;
   }
 
