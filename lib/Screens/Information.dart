@@ -5,6 +5,7 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:swipe_stack/swipe_stack.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../app_localizations.dart';
 import '../models/user_model.dart';
 import '../util/color.dart';
 import 'Chat/Matches.dart';
@@ -201,7 +202,9 @@ class Info extends StatelessWidget {
                         width: MediaQuery.of(context).size.width,
                         child: Center(
                           child: Text(
-                            "REPORT ${user.name}".toUpperCase(),
+                            AppLocalizations.of(context)
+                                    .translate('information_report') +
+                                " ${user.name}".toUpperCase(),
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 fontSize: 18,

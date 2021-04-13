@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../app_localizations.dart';
 import 'Gender.dart';
 import '../util/color.dart';
 
@@ -52,7 +53,8 @@ class _UserDOBState extends State<UserDOB> {
                 children: <Widget>[
                   Padding(
                     child: Text(
-                      "My\nbirthday is",
+                      AppLocalizations.of(context)
+                          .translate('user_dob_birthday'),
                       style: TextStyle(fontSize: 40),
                     ),
                     padding: EdgeInsets.only(left: 50, top: 120),
@@ -107,7 +109,8 @@ class _UserDOBState extends State<UserDOB> {
                       placeholder: "DD/MM/YYYY",
                       controller: dobctlr,
                     ),
-                    subtitle: Text(" Your age will be public"),
+                    subtitle: Text(AppLocalizations.of(context)
+                        .translate('user_dob_age_public')),
                   ))),
               dobctlr.text.length > 0
                   ? Padding(
@@ -132,7 +135,8 @@ class _UserDOBState extends State<UserDOB> {
                               width: MediaQuery.of(context).size.width * .75,
                               child: Center(
                                   child: Text(
-                                "CONTINUE",
+                                AppLocalizations.of(context)
+                                    .translate('search_location_continue_cap'),
                                 style: TextStyle(
                                     fontSize: 15,
                                     color: textColor,
@@ -171,7 +175,8 @@ class _UserDOBState extends State<UserDOB> {
                               width: MediaQuery.of(context).size.width * .75,
                               child: Center(
                                   child: Text(
-                                "CONTINUE",
+                                AppLocalizations.of(context)
+                                    .translate('search_location_continue_cap'),
                                 style: TextStyle(
                                     fontSize: 15,
                                     color: secondryColor,

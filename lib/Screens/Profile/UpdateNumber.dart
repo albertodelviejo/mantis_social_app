@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../../app_localizations.dart';
 import '../auth/otp.dart';
 import '../../models/user_model.dart';
 import '../../util/color.dart';
@@ -14,7 +15,7 @@ class UpdateNumber extends StatelessWidget {
       backgroundColor: primaryColor,
       appBar: AppBar(
         title: Text(
-          "Phone number settings",
+          AppLocalizations.of(context).translate('update_number'),
           style: TextStyle(color: Colors.white),
         ),
         leading: IconButton(
@@ -35,7 +36,9 @@ class UpdateNumber extends StatelessWidget {
           children: <Widget>[
             Padding(
               padding: const EdgeInsets.all(15.0),
-              child: Text("Phone number",
+              child: Text(
+                  AppLocalizations.of(context)
+                      .translate('settings_phone_number'),
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
             ),
             Card(
@@ -43,7 +46,8 @@ class UpdateNumber extends StatelessWidget {
               title: Text(
                   currentUser.phoneNumber != null
                       ? "${currentUser.phoneNumber}"
-                      : "Verify Phone number",
+                      : AppLocalizations.of(context)
+                          .translate('update_verify_phone_number'),
                   style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400)),
               trailing: Icon(
                 currentUser.phoneNumber != null ? Icons.done : null,
@@ -52,7 +56,9 @@ class UpdateNumber extends StatelessWidget {
             )),
             Padding(
               padding: const EdgeInsets.only(left: 15),
-              child: Text("Verified phone number",
+              child: Text(
+                  AppLocalizations.of(context)
+                      .translate('update_verified_phone_number'),
                   style: TextStyle(
                       fontSize: 13,
                       fontWeight: FontWeight.w400,
@@ -65,7 +71,9 @@ class UpdateNumber extends StatelessWidget {
                   child: Card(
                     child: Padding(
                       padding: const EdgeInsets.all(18.0),
-                      child: Text("Update my phone number",
+                      child: Text(
+                          AppLocalizations.of(context)
+                              .translate('update_phone_number'),
                           style: TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w500,

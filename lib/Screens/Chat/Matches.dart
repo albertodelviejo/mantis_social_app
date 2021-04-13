@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../../app_localizations.dart';
 import 'chatPage.dart';
 import '../../models/user_model.dart';
 import '../../util/color.dart';
@@ -23,7 +24,7 @@ class Matches extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text(
-                  'New Matches',
+                  AppLocalizations.of(context).translate('matches_new_matches'),
                   style: TextStyle(
                     color: primaryColor,
                     fontSize: 18.0,
@@ -100,7 +101,8 @@ class Matches extends StatelessWidget {
                     )
                   : Center(
                       child: Text(
-                      "No match found",
+                      AppLocalizations.of(context)
+                          .translate('matches_no_matches'),
                       style: TextStyle(color: secondryColor, fontSize: 16),
                     ))),
         ],

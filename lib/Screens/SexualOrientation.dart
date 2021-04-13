@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../app_localizations.dart';
 import 'ShowGender.dart';
 import '../util/color.dart';
 import '../util/snackbar.dart';
@@ -62,7 +63,8 @@ class _SexualOrientationState extends State<SexualOrientation> {
             children: <Widget>[
               Padding(
                 child: Text(
-                  "My sexual\norientation is",
+                  AppLocalizations.of(context)
+                      .translate('sexual_orientation_title'),
                   style: TextStyle(fontSize: 40),
                 ),
                 padding: EdgeInsets.only(left: 50, top: 80),
@@ -118,7 +120,9 @@ class _SexualOrientationState extends State<SexualOrientation> {
                                 selected.remove(orientationlist[index]["name"]);
                               } else {
                                 CustomSnackbar.snackbar(
-                                    "select upto 3", _scaffoldKey);
+                                    AppLocalizations.of(context)
+                                        .translate('sexual_orientation_upto'),
+                                    _scaffoldKey);
                               }
                             }
                           });
@@ -140,7 +144,8 @@ class _SexualOrientationState extends State<SexualOrientation> {
                         });
                       },
                     ),
-                    title: Text("Show my orientation on my profile"),
+                    title: Text(AppLocalizations.of(context)
+                        .translate('sexual_orientation_profile')),
                   ),
                   selected.length > 0
                       ? Padding(
@@ -167,7 +172,8 @@ class _SexualOrientationState extends State<SexualOrientation> {
                                       MediaQuery.of(context).size.width * .75,
                                   child: Center(
                                       child: Text(
-                                    "CONTINUE",
+                                    AppLocalizations.of(context).translate(
+                                        'search_location_continue_cap'),
                                     style: TextStyle(
                                         fontSize: 15,
                                         color: textColor,
@@ -206,7 +212,8 @@ class _SexualOrientationState extends State<SexualOrientation> {
                                       MediaQuery.of(context).size.width * .75,
                                   child: Center(
                                       child: Text(
-                                    "CONTINUE",
+                                    AppLocalizations.of(context).translate(
+                                        'search_location_continue_cap'),
                                     style: TextStyle(
                                         fontSize: 15,
                                         color: secondryColor,
@@ -214,7 +221,9 @@ class _SexualOrientationState extends State<SexualOrientation> {
                                   ))),
                               onTap: () {
                                 CustomSnackbar.snackbar(
-                                    "Please select one", _scaffoldKey);
+                                    AppLocalizations.of(context)
+                                        .translate('gender_please'),
+                                    _scaffoldKey);
                               },
                             ),
                           ),

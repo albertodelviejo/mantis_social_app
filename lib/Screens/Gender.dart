@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../app_localizations.dart';
 import 'SexualOrientation.dart';
 import 'UserName.dart';
 import '../util/color.dart';
@@ -68,7 +69,9 @@ class _GenderState extends State<Gender> {
                     height: MediaQuery.of(context).size.height * .065,
                     width: MediaQuery.of(context).size.width * .75,
                     child: Center(
-                        child: Text("MAN",
+                        child: Text(
+                            AppLocalizations.of(context)
+                                .translate('gender_man'),
                             style: TextStyle(
                                 fontSize: 20,
                                 color: man ? primaryColor : secondryColor,
@@ -96,7 +99,9 @@ class _GenderState extends State<Gender> {
                       height: MediaQuery.of(context).size.height * .065,
                       width: MediaQuery.of(context).size.width * .75,
                       child: Center(
-                          child: Text("WOMAN",
+                          child: Text(
+                              AppLocalizations.of(context)
+                                  .translate('gender_woman'),
                               style: TextStyle(
                                   fontSize: 20,
                                   color: woman ? primaryColor : secondryColor,
@@ -128,10 +133,14 @@ class _GenderState extends State<Gender> {
                       height: MediaQuery.of(context).size.height * .065,
                       width: MediaQuery.of(context).size.width * .75,
                       child: Center(
-                          child: Text("TRANSGENDER",
+                          child: Text(
+                              AppLocalizations.of(context)
+                                  .translate('gender_transgender'),
                               style: TextStyle(
                                   fontSize: 20,
-                                  color: transgender ? primaryColor : secondryColor,
+                                  color: transgender
+                                      ? primaryColor
+                                      : secondryColor,
                                   fontWeight: FontWeight.bold))),
                     ),
                     borderSide: BorderSide(
@@ -160,7 +169,9 @@ class _GenderState extends State<Gender> {
                     height: MediaQuery.of(context).size.height * .065,
                     width: MediaQuery.of(context).size.width * .75,
                     child: Center(
-                        child: Text("OTHER",
+                        child: Text(
+                            AppLocalizations.of(context)
+                                .translate('gender_other'),
                             style: TextStyle(
                                 fontSize: 20,
                                 color: other ? primaryColor : secondryColor,
@@ -200,7 +211,8 @@ class _GenderState extends State<Gender> {
                     });
                   },
                 ),
-                title: Text("Show my gender on my profile"),
+                title: Text(AppLocalizations.of(context)
+                    .translate('gender_show_my_gender')),
               ),
             ),
           ),
@@ -227,7 +239,8 @@ class _GenderState extends State<Gender> {
                           width: MediaQuery.of(context).size.width * .75,
                           child: Center(
                               child: Text(
-                            "CONTINUE",
+                            AppLocalizations.of(context)
+                                .translate('gender_continue'),
                             style: TextStyle(
                                 fontSize: 15,
                                 color: textColor,
@@ -282,7 +295,8 @@ class _GenderState extends State<Gender> {
                           width: MediaQuery.of(context).size.width * .75,
                           child: Center(
                               child: Text(
-                            "CONTINUE",
+                            AppLocalizations.of(context)
+                                .translate('gender_continue'),
                             style: TextStyle(
                                 fontSize: 15,
                                 color: secondryColor,
@@ -290,7 +304,7 @@ class _GenderState extends State<Gender> {
                           ))),
                       onTap: () {
                         CustomSnackbar.snackbar(
-                            "Please select one", _scaffoldKey);
+                            AppLocalizations.of(context).translate('gender_please'), _scaffoldKey);
                       },
                     ),
                   ),

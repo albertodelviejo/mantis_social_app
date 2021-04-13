@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 import 'package:apple_sign_in/apple_sign_in.dart' as i;
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -6,14 +5,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '../../app_localizations.dart';
 import '../Tab.dart';
 import '../Welcome.dart';
 import 'otp.dart';
-import '../../models/custom_web_view.dart';
 import '../../util/color.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
-import 'package:http/http.dart' as http;
 
 class Login extends StatelessWidget {
   static const your_client_id = '4159413450744988';
@@ -100,9 +98,7 @@ class Login extends StatelessWidget {
                 ),
                 Container(
                   child: Text(
-                    """By tapping "Log in", you agree with our
-Terms.Learn how we process your data in
-our Privacy Policy and Cookies Policy.""",
+                    AppLocalizations.of(context).translate('login_agreement'),
                     textAlign: TextAlign.center,
                     style: TextStyle(color: Colors.black54, fontSize: 15),
                   ),
@@ -132,7 +128,8 @@ our Privacy Policy and Cookies Policy.""",
                             width: MediaQuery.of(context).size.width * .8,
                             child: Center(
                                 child: Text(
-                              "LOG IN WITH FACEBOOK",
+                              AppLocalizations.of(context)
+                                  .translate("login_with_facebook"),
                               style: TextStyle(
                                   color: textColor,
                                   fontWeight: FontWeight.bold),
@@ -196,7 +193,9 @@ our Privacy Policy and Cookies Policy.""",
                     height: MediaQuery.of(context).size.height * .065,
                     width: MediaQuery.of(context).size.width * .75,
                     child: Center(
-                        child: Text("LOG IN WITH PHONE NUMBER",
+                        child: Text(
+                            AppLocalizations.of(context)
+                                .translate('login_with_phone_number'),
                             style: TextStyle(
                                 color: primaryColor,
                                 fontWeight: FontWeight.bold))),
@@ -220,7 +219,8 @@ our Privacy Policy and Cookies Policy.""",
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Text(
-                      "Trouble logging in?",
+                      AppLocalizations.of(context)
+                          .translate('login_trouble_question'),
                       style: TextStyle(
                           color: Colors.black,
                           fontSize: 12,
@@ -234,7 +234,8 @@ our Privacy Policy and Cookies Policy.""",
                 children: <Widget>[
                   GestureDetector(
                     child: Text(
-                      "Privacy Policy",
+                      AppLocalizations.of(context)
+                          .translate('login_privacy_policy'),
                       style: TextStyle(color: Colors.blue),
                     ),
                     onTap: () => _launchURL(
@@ -250,7 +251,8 @@ our Privacy Policy and Cookies Policy.""",
                   ),
                   GestureDetector(
                     child: Text(
-                      "Terms & Conditions",
+                      AppLocalizations.of(context)
+                          .translate('login_terms_conditions'),
                       style: TextStyle(color: Colors.blue),
                     ),
                     onTap: () => _launchURL(
@@ -267,8 +269,9 @@ our Privacy Policy and Cookies Policy.""",
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
-              title: Text('Exit'),
-              content: Text('Do you want to exit the app?'),
+              title: Text(AppLocalizations.of(context).translate('login_exit')),
+              content: Text(AppLocalizations.of(context)
+                  .translate('login_exit_question')),
               actions: <Widget>[
                 FlatButton(
                   onPressed: () => Navigator.of(context).pop(false),

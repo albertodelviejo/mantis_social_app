@@ -7,9 +7,11 @@ import 'Screens/Splash.dart';
 import 'Screens/Tab.dart';
 import 'Screens/Welcome.dart';
 import 'Screens/auth/login.dart';
+import 'app_localizations.dart';
 import 'util/color.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -88,6 +90,28 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         primaryColor: primaryColor,
       ),
+      supportedLocales: [
+        Locale('en', 'US'),
+        Locale('th', 'TH'),
+      ],
+      localizationsDelegates: [
+        // THIS CLASS WILL BE ADDED LATER
+        // A class which loads the translations from JSON files
+        AppLocalizations.delegate,
+        // Built-in localization of basic text for Material widgets
+        GlobalMaterialLocalizations.delegate,
+        // Built-in localization for text direction LTR/RTL
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      localeResolutionCallback: (locale, supportedLocales) {
+        for (var supportedLocale in supportedLocales) {
+          if (supportedLocale.languageCode == locale.languageCode &&
+              supportedLocale.countryCode == locale.countryCode) {
+            return supportedLocale;
+          }
+        }
+        return supportedLocales.first;
+      },
       home: isLoading
           ? Splash()
           : isRegistered

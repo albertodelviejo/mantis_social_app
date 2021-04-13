@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../app_localizations.dart';
 import 'University.dart';
 import '../util/color.dart';
 import '../util/snackbar.dart';
@@ -49,7 +50,7 @@ class _ShowGenderState extends State<ShowGender> {
         children: <Widget>[
           Padding(
             child: Text(
-              "Show me",
+              AppLocalizations.of(context).translate('settings_show_me'),
               style: TextStyle(fontSize: 40),
             ),
             padding: EdgeInsets.only(left: 50, top: 120),
@@ -65,7 +66,9 @@ class _ShowGenderState extends State<ShowGender> {
                     height: MediaQuery.of(context).size.height * .065,
                     width: MediaQuery.of(context).size.width * .75,
                     child: Center(
-                        child: Text("MEN",
+                        child: Text(
+                            AppLocalizations.of(context)
+                                .translate('show_gender_men'),
                             style: TextStyle(
                                 fontSize: 20,
                                 color: man ? primaryColor : secondryColor,
@@ -98,7 +101,9 @@ class _ShowGenderState extends State<ShowGender> {
                       height: MediaQuery.of(context).size.height * .065,
                       width: MediaQuery.of(context).size.width * .75,
                       child: Center(
-                          child: Text("WOMEN",
+                          child: Text(
+                              AppLocalizations.of(context)
+                                  .translate('show_gender_women'),
                               style: TextStyle(
                                   fontSize: 20,
                                   color: woman ? primaryColor : secondryColor,
@@ -135,7 +140,9 @@ class _ShowGenderState extends State<ShowGender> {
                       height: MediaQuery.of(context).size.height * .065,
                       width: MediaQuery.of(context).size.width * .75,
                       child: Center(
-                          child: Text("TRANSGENDER",
+                          child: Text(
+                              AppLocalizations.of(context)
+                                  .translate('show_gender_transgender'),
                               style: TextStyle(
                                   fontSize: 20,
                                   color: transgender
@@ -174,7 +181,9 @@ class _ShowGenderState extends State<ShowGender> {
                     height: MediaQuery.of(context).size.height * .065,
                     width: MediaQuery.of(context).size.width * .75,
                     child: Center(
-                        child: Text("EVERYONE",
+                        child: Text(
+                            AppLocalizations.of(context)
+                                .translate('show_gender_everyone'),
                             style: TextStyle(
                                 fontSize: 20,
                                 color: eyeryone ? primaryColor : secondryColor,
@@ -227,7 +236,8 @@ class _ShowGenderState extends State<ShowGender> {
                           width: MediaQuery.of(context).size.width * .75,
                           child: Center(
                               child: Text(
-                            "CONTINUE",
+                            AppLocalizations.of(context)
+                                .translate('search_location_continue_cap'),
                             style: TextStyle(
                                 fontSize: 15,
                                 color: textColor,
@@ -277,7 +287,8 @@ class _ShowGenderState extends State<ShowGender> {
                           width: MediaQuery.of(context).size.width * .75,
                           child: Center(
                               child: Text(
-                            "CONTINUE",
+                            AppLocalizations.of(context)
+                                .translate('search_location_continue_cap'),
                             style: TextStyle(
                                 fontSize: 15,
                                 color: secondryColor,
@@ -285,7 +296,9 @@ class _ShowGenderState extends State<ShowGender> {
                           ))),
                       onTap: () {
                         CustomSnackbar.snackbar(
-                            "Please select one", _scaffoldKey);
+                            AppLocalizations.of(context)
+                                .translate('gender_please'),
+                            _scaffoldKey);
                       },
                     ),
                   ),

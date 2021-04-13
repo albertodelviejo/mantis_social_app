@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../app_localizations.dart';
 import '../models/user_model.dart';
 import '../util/color.dart';
 
@@ -35,7 +36,7 @@ class _ReportUserState extends State<ReportUser> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                "Report User",
+                AppLocalizations.of(context).translate('report_user'),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 22,
@@ -43,7 +44,8 @@ class _ReportUserState extends State<ReportUser> {
               ),
             ),
             Text(
-              "Is this person bothering you? Tell us what they did.",
+              AppLocalizations.of(context)
+                  .translate('report_user_report_question'),
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 14, color: Colors.black),
             ),
@@ -54,42 +56,55 @@ class _ReportUserState extends State<ReportUser> {
           ? <Widget>[
               Material(
                 child: ListTile(
-                    title: Text("Inappropriate Photos"),
+                    title: Text(AppLocalizations.of(context)
+                        .translate('report_user_inappropriate_photos')),
                     leading: Icon(
                       Icons.camera_alt,
                       color: Colors.indigo,
                     ),
-                    onTap: () => _newReport(context, "Inappropriate Photos")
+                    onTap: () => _newReport(
+                            context,
+                            AppLocalizations.of(context)
+                                .translate('report_user_inappropriate_photos'))
                         .then((value) => Navigator.pop(context))),
               ),
               Material(
                 child: ListTile(
                     title: Text(
-                      "Feels Like Spam",
+                      AppLocalizations.of(context)
+                          .translate('report_user_spam'),
                     ),
                     leading: Icon(
                       Icons.sentiment_very_dissatisfied,
                       color: Colors.orange,
                     ),
-                    onTap: () => _newReport(context, "Feels Like Spam")
+                    onTap: () => _newReport(
+                            context,
+                            AppLocalizations.of(context)
+                                .translate('report_user_spam'))
                         .then((value) => Navigator.pop(context))),
               ),
               Material(
                 child: ListTile(
                     title: Text(
-                      "User is underage",
+                      AppLocalizations.of(context)
+                          .translate('report_user_underage'),
                     ),
                     leading: Icon(
                       Icons.call_missed_outgoing,
                       color: Colors.blue,
                     ),
-                    onTap: () => _newReport(context, "User is underage")
+                    onTap: () => _newReport(
+                            context,
+                            AppLocalizations.of(context)
+                                .translate('report_user_underage'))
                         .then((value) => Navigator.pop(context))),
               ),
               Material(
                 child: ListTile(
                     title: Text(
-                      "Other",
+                      AppLocalizations.of(context)
+                          .translate('report_user_other'),
                     ),
                     leading: Icon(
                       Icons.report_problem,
@@ -111,14 +126,16 @@ class _ReportUserState extends State<ReportUser> {
                     TextField(
                       controller: reasonCtlr,
                       decoration: InputDecoration(
-                          hintText: "Additional Info(optional)"),
+                          hintText: AppLocalizations.of(context)
+                              .translate('report_user_additional_info')),
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 10),
                       child: RaisedButton(
                           color: primaryColor,
                           child: Text(
-                            "Report User",
+                            AppLocalizations.of(context)
+                                .translate('report_user'),
                             style: TextStyle(color: Colors.white),
                           ),
                           onPressed: () {
@@ -164,7 +181,8 @@ class _ReportUserState extends State<ReportUser> {
                         colorBlendMode: BlendMode.color,
                       ),
                       Text(
-                        "Reported",
+                        AppLocalizations.of(context)
+                            .translate('report_user_reported'),
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             decoration: TextDecoration.none,

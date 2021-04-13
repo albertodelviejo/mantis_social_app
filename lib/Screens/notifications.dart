@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../app_localizations.dart';
 import 'Information.dart';
 import '../models/user_model.dart';
 import '../util/color.dart';
@@ -45,7 +46,7 @@ class _NotificationsState extends State<Notifications> {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           title: Text(
-            'Notifications',
+            AppLocalizations.of(context).translate('notifications_title'),
             style: TextStyle(
               color: Colors.white,
               fontSize: 18.0,
@@ -92,13 +93,15 @@ class _NotificationsState extends State<Notifications> {
                       if (!snapshot.hasData)
                         return Center(
                             child: Text(
-                          "No Notification",
+                          AppLocalizations.of(context)
+                              .translate('notifications_no_notification'),
                           style: TextStyle(color: secondryColor, fontSize: 16),
                         ));
                       else if (snapshot.data.docs.length == 0) {
                         return Center(
                             child: Text(
-                          "No Notification",
+                          AppLocalizations.of(context)
+                              .translate('notifications_no_notification'),
                           style: TextStyle(color: secondryColor, fontSize: 16),
                         ));
                       }
@@ -149,8 +152,11 @@ class _NotificationsState extends State<Notifications> {
                                             //       .sender.imageUrl[0],
                                             // )
                                           ),
-                                          title: Text(
-                                              "you are matched with ${doc.data()['userName'] ?? "__"}"),
+                                          title: Text(AppLocalizations.of(
+                                                      context)
+                                                  .translate(
+                                                      'notifications_matched_with') +
+                                              "${doc.data()['userName'] ?? "__"}"),
                                           subtitle: Text(
                                               "${(doc.data()['timestamp'].toDate())}"),
                                           //  Text(

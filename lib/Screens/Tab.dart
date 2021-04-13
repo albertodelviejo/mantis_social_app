@@ -7,6 +7,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '../app_localizations.dart';
 import 'Profile/profile.dart';
 import 'Splash.dart';
 import 'blockUserByAdmin.dart';
@@ -18,6 +19,7 @@ import 'Calling/incomingCall.dart';
 import 'Chat/home_screen.dart';
 import 'Home.dart';
 import '../util/color.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 List likedByList = [];
 
@@ -31,9 +33,11 @@ class Tabbar extends StatefulWidget {
 
 //_
 class TabbarState extends State<Tabbar> {
-  FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+  FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
   CollectionReference docRef = FirebaseFirestore.instance.collection('Users');
   FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+      FlutterLocalNotificationsPlugin();
   UserModel currentUser;
   List<UserModel> matches = [];
   List<UserModel> newmatches = [];
@@ -53,8 +57,9 @@ class TabbarState extends State<Tabbar> {
         await Alert(
           context: context,
           type: AlertType.success,
-          title: "Confirmation",
-          desc: "You have successfully subscribed to our ${widget.plan} plan.",
+          title: AppLocalizations.of(context).translate('tab_alert_title'),
+          desc: AppLocalizations.of(context).translate('tab_alert_desc') +
+              " ${widget.plan} plan.",
           buttons: [
             DialogButton(
               child: Text(
@@ -150,6 +155,7 @@ class TabbarState extends State<Tabbar> {
     });
   }
 
+/*
   configurePushNotification(User user) async {
     await _firebaseMessaging.requestNotificationPermissions(
         IosNotificationSettings(
@@ -236,6 +242,34 @@ class TabbarState extends State<Tabbar> {
       },
     );
   }
+*/
+  configurePushNotificationNew(User user) async {
+    await _firebaseMessaging.requestPermission(
+        alert: true, sound: true, provisional: false, badge: true);
+
+    _firebaseMessaging.getToken().then((token) {
+      print(token);
+      docRef.doc(user.uid).update({
+        'pushToken': token,
+      });
+    });
+
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
+      print("onmessage$message");
+      if (Platform.isIOS && message.data['type'] == 'Call') {
+        Map callInfo = {};
+        callInfo['channel_id'] = message.data['channel_id'];
+        callInfo['senderName'] = message.data['senderName'];
+        callInfo['senderPicture'] = message.data['senderPicture'];
+        await Navigator.push(context,
+            MaterialPageRoute(builder: (context) => Incoming(callInfo)));
+      } else if (Platform.isAndroid && message.data['type'] == 'Call') {
+        await Navigator.push(context,
+            MaterialPageRoute(builder: (context) => Incoming(message.data)));
+      } else
+        print("object");
+    });
+  }
 
   _checkcallState(channelId) async {
     bool iscalling = await FirebaseFirestore.instance
@@ -287,7 +321,7 @@ class TabbarState extends State<Tabbar> {
       userRemoved.clear();
       getUserList();
       getLikedByList();
-      configurePushNotification(user);
+      configurePushNotificationNew(user);
       if (!isPuchased) {
         _getSwipedcount();
       }
@@ -330,14 +364,14 @@ class TabbarState extends State<Tabbar> {
       checkedUser.addAll(data.docs.map((f) => f['DislikedUser']));
       checkedUser.addAll(data.docs.map((f) => f['LikedUser']));
     }).then((_) {
-      query().getDocuments().then((data) async {
-        if (data.documents.length < 1) {
+      query().get().then((data) async {
+        if (data.docs.length < 1) {
           print("no more data");
           return;
         }
         users.clear();
         userRemoved.clear();
-        for (var doc in data.documents) {
+        for (var doc in data.docs) {
           UserModel temp = UserModel.fromDocument(doc);
           var distance = calculateDistance(
               currentUser.coordinates['latitude'],

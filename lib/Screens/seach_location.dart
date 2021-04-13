@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../app_localizations.dart';
 import '../util/color.dart';
 import '../util/snackbar.dart';
 import 'AllowLocation.dart';
-import 'package:flutter_mapbox_autocomplete/flutter_mapbox_autocomplete.dart';
+import 'package:mapbox_autocomplete/mapbox_autocomplete.dart';
 
 class SearchLocation extends StatefulWidget {
   final Map<String, dynamic> userData;
@@ -57,7 +58,8 @@ class _SearchLocationState extends State<SearchLocation> {
               children: <Widget>[
                 Padding(
                   child: Text(
-                    "Select\nyour city",
+                    AppLocalizations.of(context)
+                        .translate('search_location_select_city'),
                     style: TextStyle(fontSize: 40),
                   ),
                   padding: EdgeInsets.only(left: 50, top: 120),
@@ -71,10 +73,12 @@ class _SearchLocationState extends State<SearchLocation> {
                         autofocus: false,
                         readOnly: true,
                         decoration: InputDecoration(
-                          hintText: "Enter your city name",
+                          hintText: AppLocalizations.of(context)
+                              .translate('search_location_city_name'),
                           focusedBorder: UnderlineInputBorder(
                               borderSide: BorderSide(color: primaryColor)),
-                          helperText: "This is how it will appear in App.",
+                          helperText: AppLocalizations.of(context)
+                              .translate('search_location_how_will_appear'),
                           helperStyle:
                               TextStyle(color: secondryColor, fontSize: 15),
                         ),
@@ -85,9 +89,10 @@ class _SearchLocationState extends State<SearchLocation> {
                               builder: (context) => MapBoxAutoCompleteWidget(
                                 language: 'en',
                                 closeOnSelect: true,
-                                apiKey: mapboxApi,
                                 limit: 10,
-                                hint: 'Enter your city name',
+                                apiKey: mapboxApi,
+                                hint: AppLocalizations.of(context)
+                                    .translate('search_location_city_name'),
                                 onSelect: (place) {
                                   setState(() {
                                     _mapBoxPlace = place;
@@ -124,7 +129,8 @@ class _SearchLocationState extends State<SearchLocation> {
                                 width: MediaQuery.of(context).size.width * .75,
                                 child: Center(
                                     child: Text(
-                                  "Continue",
+                                  AppLocalizations.of(context)
+                                      .translate('search_location_continue'),
                                   style: TextStyle(
                                       fontSize: 15,
                                       color: textColor,
@@ -169,7 +175,8 @@ class _SearchLocationState extends State<SearchLocation> {
                                 width: MediaQuery.of(context).size.width * .75,
                                 child: Center(
                                     child: Text(
-                                  "CONTINUE",
+                                  AppLocalizations.of(context).translate(
+                                      'search_location_continue_cap'),
                                   style: TextStyle(
                                       fontSize: 15,
                                       color: secondryColor,
@@ -177,7 +184,9 @@ class _SearchLocationState extends State<SearchLocation> {
                                 ))),
                             onTap: () {
                               CustomSnackbar.snackbar(
-                                  "Select a location !", _scaffoldKey);
+                                  AppLocalizations.of(context)
+                                      .translate('search_location'),
+                                  _scaffoldKey);
                             },
                           ),
                         ),

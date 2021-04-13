@@ -1,9 +1,11 @@
+import 'dart:io';
 import 'dart:math';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../../app_localizations.dart';
 import 'largeImage.dart';
 import '../Information.dart';
 import '../reportUser.dart';
@@ -438,7 +440,8 @@ class _ChatPageState extends State<ChatPage> {
                         width: 100,
                         height: 30,
                         child: Text(
-                          "Report",
+                          AppLocalizations.of(context)
+                              .translate('message_screen_report'),
                         )),
                   ),
                 ),
@@ -446,14 +449,24 @@ class _ChatPageState extends State<ChatPage> {
                   height: 30,
                   value: 'value2',
                   child: InkWell(
-                    child: Text(isBlocked ? "Unblock user" : "Block user"),
+                    child: Text(isBlocked
+                        ? AppLocalizations.of(context)
+                            .translate('message_screen_unblock_user')
+                        : AppLocalizations.of(context)
+                            .translate('message_screen_block_user')),
                     onTap: () {
                       Navigator.pop(ct);
                       showDialog(
                         context: context,
                         builder: (BuildContext ctx) {
                           return AlertDialog(
-                            title: Text(isBlocked ? 'Unblock' : 'Block'),
+                            title: Text(
+                              isBlocked
+                                  ? AppLocalizations.of(context)
+                                      .translate('message_screen_unblock')
+                                  : AppLocalizations.of(context)
+                                      .translate('message_screen_block'),
+                            ),
                             content: Text(
                                 'Do you want to ${isBlocked ? 'Unblock' : 'Block'} ${widget.second.name}?'),
                             actions: <Widget>[
@@ -544,7 +557,8 @@ class _ChatPageState extends State<ChatPage> {
                     decoration:
                         BoxDecoration(color: Theme.of(context).cardColor),
                     child: isBlocked
-                        ? Text("Sorry You can't send message!")
+                        ? Text(AppLocalizations.of(context)
+                            .translate('message_screen_cant_send_message'))
                         : _buildTextComposer(),
                   ),
                 ],
@@ -587,7 +601,8 @@ class _ChatPageState extends State<ChatPage> {
                       color: primaryColor,
                     ),
                     onPressed: () async {
-                      var image = await ImagePicker.pickImage(
+                      ImagePicker imagePicker = ImagePicker();
+                      var image = await imagePicker.getImage(
                           source: ImageSource.gallery);
                       int timestamp = new DateTime.now().millisecondsSinceEpoch;
                       Reference storageReference = FirebaseStorage.instance
@@ -595,7 +610,8 @@ class _ChatPageState extends State<ChatPage> {
                           .child('chats/${widget.chatId}/img_' +
                               timestamp.toString() +
                               '.jpg');
-                      UploadTask uploadTask = storageReference.putFile(image);
+                      UploadTask uploadTask =
+                          storageReference.putFile(File(image.path));
                       await uploadTask.whenComplete(() async {
                         String fileUrl =
                             await storageReference.getDownloadURL();
@@ -618,7 +634,8 @@ class _ChatPageState extends State<ChatPage> {
                       floatingLabelBehavior: FloatingLabelBehavior.auto,
                       // border: OutlineInputBorder(
                       //     borderRadius: BorderRadius.circular(18)),
-                      hintText: "Send a message..."),
+                      hintText: AppLocalizations.of(context)
+                          .translate('message_screen_send_message')),
                 ),
               ),
               Container(

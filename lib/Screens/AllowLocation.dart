@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../app_localizations.dart';
 import 'Tab.dart';
 import 'seach_location.dart';
 import '../util/color.dart';
@@ -60,7 +61,8 @@ class AllowLocation extends StatelessWidget {
                           CupertinoPageRoute(
                               builder: (context) => SearchLocation(userData))),
                       label: Text(
-                        "Skip..",
+                        AppLocalizations.of(context)
+                            .translate('allow_location_skip'),
                         style: TextStyle(color: primaryColor),
                       ),
                       icon: Icon(
@@ -100,14 +102,13 @@ class AllowLocation extends StatelessWidget {
                     padding: const EdgeInsets.only(top: 0),
                     child: RichText(
                       text: TextSpan(
-                        text: "Enable location",
+                        text: AppLocalizations.of(context)
+                            .translate('allow_location_enable'),
                         style: TextStyle(color: Colors.black, fontSize: 40),
                         children: [
                           TextSpan(
-                              text: """\nYou'll need to provide a
-location
-in order to search users around you.
-                              """,
+                              text: AppLocalizations.of(context)
+                                  .translate('allow_message'),
                               style: TextStyle(
                                   fontWeight: FontWeight.w400,
                                   color: secondryColor,
@@ -148,7 +149,8 @@ in order to search users around you.
                       width: MediaQuery.of(context).size.width * .75,
                       child: Center(
                           child: Text(
-                        "ALLOW LOCATION",
+                        AppLocalizations.of(context)
+                            .translate('allow_location'),
                         style: TextStyle(
                             fontSize: 15,
                             color: textColor,

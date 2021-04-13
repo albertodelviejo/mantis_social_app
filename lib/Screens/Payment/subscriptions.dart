@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import '../../app_localizations.dart';
 import '../../models/user_model.dart';
 import '../../util/color.dart';
 import '../../util/snackbar.dart';
@@ -54,12 +55,13 @@ class _SubscriptionState extends State<Subscription> {
         await Alert(
           context: context,
           type: AlertType.error,
-          title: "Failed",
-          desc: "Oops !! something went wrong. Try Again",
+          title: AppLocalizations.of(context).translate('subscriptions_failed'),
+          desc: AppLocalizations.of(context)
+              .translate('subscriptions_failed_text'),
           buttons: [
             DialogButton(
               child: Text(
-                "Retry",
+                AppLocalizations.of(context).translate('subscriptions_retry'),
                 style: TextStyle(color: Colors.white, fontSize: 20),
               ),
               onPressed: () => Navigator.pop(context),
@@ -80,12 +82,12 @@ class _SubscriptionState extends State<Subscription> {
   Future<List<String>> _fetchPackageIds() async {
     List<String> packageId = [];
 
-    await Firestore.instance
+    await FirebaseFirestore.instance
         .collection("Packages")
         .where('status', isEqualTo: true)
-        .getDocuments()
+        .get()
         .then((value) {
-      packageId.addAll(value.documents.map((e) => e['id']));
+      packageId.addAll(value.docs.map((e) => e['id']));
     });
 
     return packageId;
@@ -133,7 +135,8 @@ class _SubscriptionState extends State<Subscription> {
             SnackBar(
               content: error != null
                   ? Text('$error')
-                  : Text("Oops !! something went wrong. Try Again"),
+                  : Text(AppLocalizations.of(context)
+                      .translate('subscriptions_failed_text')),
             ),
           );
         },
@@ -146,6 +149,48 @@ class _SubscriptionState extends State<Subscription> {
 
   @override
   Widget build(BuildContext context) {
+    final List adds = [
+      {
+        'icon': Icons.whatshot,
+        'color': Colors.indigo,
+        'title':
+            AppLocalizations.of(context).translate('profile_adds_match_title'),
+        'subtitle': AppLocalizations.of(context)
+            .translate('profile_adds_match_subtitle'),
+      },
+      {
+        'icon': Icons.favorite,
+        'color': Colors.lightBlueAccent,
+        'title':
+            AppLocalizations.of(context).translate('profile_adds_rew_title'),
+        'subtitle':
+            AppLocalizations.of(context).translate('profile_adds_rew_subtitle'),
+      },
+      {
+        'icon': Icons.star_half,
+        'color': Colors.amber,
+        'title':
+            AppLocalizations.of(context).translate('profile_adds_like_title'),
+        'subtitle': AppLocalizations.of(context)
+            .translate('profile_adds_like_subtitle'),
+      },
+      {
+        'icon': Icons.location_on,
+        'color': Colors.purple,
+        'title': AppLocalizations.of(context)
+            .translate('profile_adds_location_title'),
+        'subtitle': AppLocalizations.of(context)
+            .translate('profile_adds_location_subtitle'),
+      },
+      {
+        'icon': Icons.vpn_key,
+        'color': Colors.orange,
+        'title': AppLocalizations.of(context)
+            .translate('profile_adds_security_title'),
+        'subtitle': AppLocalizations.of(context)
+            .translate('profile_adds_security_subtitle'),
+      }
+    ];
     return Scaffold(
       key: _scaffoldKey,
       body: SingleChildScrollView(
@@ -180,7 +225,8 @@ class _SubscriptionState extends State<Subscription> {
                     ListTile(
                       dense: true,
                       title: Text(
-                        "Get our premium plans",
+                        AppLocalizations.of(context)
+                            .translate('subscriptions_premium_plans'),
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             color: primaryColor,
@@ -195,7 +241,8 @@ class _SubscriptionState extends State<Subscription> {
                         color: Colors.blue,
                       ),
                       title: Text(
-                        "Unlimited swipe.",
+                        AppLocalizations.of(context)
+                            .translate('subscriptions_premium_swipe'),
                         style: TextStyle(
                             fontSize: 16, fontWeight: FontWeight.w400),
                       ),
@@ -207,7 +254,9 @@ class _SubscriptionState extends State<Subscription> {
                         color: Colors.green,
                       ),
                       title: Text(
-                        "Search users around ${widget.items['paid_radius'] ?? ""} kms.",
+                        AppLocalizations.of(context)
+                                .translate('subscriptions_premium_around') +
+                            "${widget.items['paid_radius'] ?? ""} kms.",
                         style: TextStyle(
 
                             // Color(0xFF1A1A1A),
@@ -383,7 +432,8 @@ class _SubscriptionState extends State<Subscription> {
                             : Container(
                                 height: MediaQuery.of(context).size.width * .8,
                                 child: Center(
-                                  child: Text("No active product found!!"),
+                                  child: Text(AppLocalizations.of(context)
+                                      .translate('subscriptions_no_product')),
                                 ),
                               )
                   ],
@@ -412,7 +462,8 @@ class _SubscriptionState extends State<Subscription> {
                         width: MediaQuery.of(context).size.width * .55,
                         child: Center(
                             child: Text(
-                          "CONTINUE",
+                          AppLocalizations.of(context)
+                              .translate('subscriptions_continue'),
                           style: TextStyle(
                               fontSize: 15,
                               color: textColor,
@@ -423,7 +474,8 @@ class _SubscriptionState extends State<Subscription> {
                         _buyProduct(selectedProduct);
                       else {
                         CustomSnackbar.snackbar(
-                            "You must choose a subscription to continue.",
+                            AppLocalizations.of(context)
+                                .translate('subscriptions_must_choose'),
                             _scaffoldKey);
                       }
                     },
@@ -451,7 +503,8 @@ class _SubscriptionState extends State<Subscription> {
                         width: MediaQuery.of(context).size.width * .55,
                         child: Center(
                             child: Text(
-                          "RESTORE PURCHASE",
+                          AppLocalizations.of(context)
+                              .translate('subscriptions_restore_purchase'),
                           style: TextStyle(
                               fontSize: 15,
                               color: textColor,
@@ -464,8 +517,10 @@ class _SubscriptionState extends State<Subscription> {
                             context: context,
                             builder: (ctx) {
                               return AlertDialog(
-                                content: Text("No purchase found"),
-                                title: Text("Past Purchases"),
+                                content: Text(AppLocalizations.of(context)
+                                    .translate('subscriptions_no_purchase')),
+                                title: Text(AppLocalizations.of(context)
+                                    .translate('subscriptions_past_purchase')),
                               );
                             });
                       }
@@ -482,7 +537,8 @@ class _SubscriptionState extends State<Subscription> {
                 children: <Widget>[
                   GestureDetector(
                     child: Text(
-                      "Privacy Policy",
+                      AppLocalizations.of(context)
+                          .translate('login_privacy_policy'),
                       style: TextStyle(color: Colors.blue),
                     ),
                     onTap: () => launch(
@@ -491,7 +547,8 @@ class _SubscriptionState extends State<Subscription> {
                   ),
                   GestureDetector(
                     child: Text(
-                      "Terms & Conditions",
+                      AppLocalizations.of(context)
+                          .translate('login_terms_conditions'),
                       style: TextStyle(color: Colors.blue),
                     ),
                     onTap: () => launch(
@@ -653,22 +710,22 @@ class _SubscriptionState extends State<Subscription> {
     SKSubscriptionPeriodUnit periodUnit =
         product.skProduct.subscriptionPeriod.unit;
     if (SKSubscriptionPeriodUnit.month == periodUnit) {
-      return "Month(s)";
+      return AppLocalizations.of(context).translate('subscriptions_months');
     } else if (SKSubscriptionPeriodUnit.week == periodUnit) {
-      return "Week(s)";
+      return AppLocalizations.of(context).translate('subscriptions_week');
     } else {
-      return "Year";
+      return AppLocalizations.of(context).translate('subscriptions_year');
     }
   }
 
   String getIntervalAndroid(ProductDetails product) {
     String durCode = product.skuDetail.subscriptionPeriod.split("")[2];
     if (durCode == "M") {
-      return "Month(s)";
+      return AppLocalizations.of(context).translate('subscriptions_week');
     } else if (durCode == "Y") {
-      return "Year";
+      return AppLocalizations.of(context).translate('subscriptions_year');
     } else {
-      return "Week(s)";
+      return AppLocalizations.of(context).translate('subscriptions_week');
     }
   }
 }
