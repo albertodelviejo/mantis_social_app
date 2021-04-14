@@ -257,7 +257,7 @@ class _ChatPageState extends State<ChatPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Container(
-              child: documentSnapshot.data['image_url'] != ''
+              child: documentSnapshot.data()['image_url'] != ''
                   ? InkWell(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
@@ -276,7 +276,7 @@ class _ChatPageState extends State<ChatPage> {
                               height: MediaQuery.of(context).size.height * .65,
                               width: MediaQuery.of(context).size.width * .9,
                               imageUrl:
-                                  documentSnapshot.data['image_url'] ?? '',
+                                  documentSnapshot.data()['image_url'] ?? '',
                               fit: BoxFit.fitWidth,
                             ),
                             height: 150,
@@ -287,10 +287,11 @@ class _ChatPageState extends State<ChatPage> {
                           Padding(
                             padding: const EdgeInsets.only(right: 10),
                             child: Text(
-                                documentSnapshot.data["time"] != null
+                                documentSnapshot.data()["time"] != null
                                     ? DateFormat.yMMMd()
                                         .add_jm()
-                                        .format(documentSnapshot.data["time"]
+                                        .format(documentSnapshot
+                                            .data()["time"]
                                             .toDate())
                                         .toString()
                                     : "",
@@ -305,7 +306,7 @@ class _ChatPageState extends State<ChatPage> {
                       onTap: () {
                         Navigator.of(context).push(CupertinoPageRoute(
                           builder: (context) => LargeImage(
-                            documentSnapshot.data['image_url'],
+                            documentSnapshot.data()['image_url'],
                           ),
                         ));
                       },
@@ -327,7 +328,7 @@ class _ChatPageState extends State<ChatPage> {
                               Expanded(
                                 child: Container(
                                   child: Text(
-                                    documentSnapshot.data['text'],
+                                    documentSnapshot.data()['text'],
                                     style: TextStyle(
                                       color: Colors.black87,
                                       fontSize: 16.0,
@@ -340,11 +341,11 @@ class _ChatPageState extends State<ChatPage> {
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: <Widget>[
                                   Text(
-                                    documentSnapshot.data["time"] != null
+                                    documentSnapshot.data()["time"] != null
                                         ? DateFormat.MMMd()
                                             .add_jm()
                                             .format(documentSnapshot
-                                                .data["time"]
+                                                .data()["time"]
                                                 .toDate())
                                             .toString()
                                         : "",
