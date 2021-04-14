@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import '../app_localizations.dart';
 import 'Information.dart';
 import 'Payment/subscriptions.dart';
 import 'Tab.dart';
@@ -79,7 +80,8 @@ class _CardPicturesState extends State<CardPictures>
                                         ),
                                       ),
                                       Text(
-                                        "There's no one new around you.",
+                                        AppLocalizations.of(context)
+                                            .translate('home_no_one'),
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                             color: secondryColor,
@@ -352,7 +354,11 @@ class _CardPicturesState extends State<CardPictures>
                                                       width: 300,
                                                       child: Center(
                                                         child: Text(
-                                                          "It's a match\n With ${widget.users[index].name}",
+                                                          AppLocalizations.of(
+                                                                      context)
+                                                                  .translate(
+                                                                      'home_match') +
+                                                              "${widget.users[index].name}",
                                                           textAlign:
                                                               TextAlign.center,
                                                           style: TextStyle(
@@ -543,7 +549,8 @@ class _CardPicturesState extends State<CardPictures>
                                       color: primaryColor,
                                     ),
                                     Text(
-                                      "you have already used the maximum number of free available swipes for 24 hrs.",
+                                      AppLocalizations.of(context)
+                                          .translate('home_maximum'),
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,
@@ -559,7 +566,8 @@ class _CardPicturesState extends State<CardPictures>
                                       ),
                                     ),
                                     Text(
-                                      "For swipe more users just subscribe our premium plans.",
+                                      AppLocalizations.of(context)
+                                          .translate('home_swipe_premium'),
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                           color: primaryColor,

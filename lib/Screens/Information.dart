@@ -3,7 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:swipe_stack/swipe_stack.dart';
+import 'package:url_launcher/url_launcher.dart';
 
+import '../app_localizations.dart';
 import '../models/user_model.dart';
 import '../util/color.dart';
 import 'Chat/Matches.dart';
@@ -184,6 +186,10 @@ class Info extends StatelessWidget {
                     height: 20,
                   ),
                   user.editInfo['about'] != null ? Divider() : Container(),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 20.0),
+                    child: socialMediaRow(user),
+                  ),
                   InkWell(
                     onTap: () => showDialog(
                         barrierDismissible: true,
@@ -196,7 +202,9 @@ class Info extends StatelessWidget {
                         width: MediaQuery.of(context).size.width,
                         child: Center(
                           child: Text(
-                            "REPORT ${user.name}".toUpperCase(),
+                            AppLocalizations.of(context)
+                                    .translate('information_report') +
+                                " ${user.name}".toUpperCase(),
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 fontSize: 18,
@@ -290,4 +298,241 @@ class Info extends StatelessWidget {
       ),
     );
   }
+}
+
+Widget socialMediaRow(UserModel user) {
+  final String facebookUrl = user.editInfo['facebook_url'];
+  final String instagramUrl = user.editInfo['instagram_url'];
+  final String tiktokUrl = user.editInfo['tiktok_url'];
+  final String twitterUrl = user.editInfo['twitter_url'];
+  final String snapchatUrl = user.editInfo['snapchat_url'];
+  final String whatsappUrl = user.editInfo['whatsapp_url'];
+  final String wechatUrl = user.editInfo['wechat_url'];
+  final String lineUrl = user.editInfo['line_url'];
+
+  return SingleChildScrollView(
+    scrollDirection: Axis.horizontal,
+    child: Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        if (facebookUrl != null)
+          GestureDetector(
+            onTap: () => launch(facebookUrl),
+            child: Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: Stack(children: [
+                Container(
+                  width: 40.0,
+                  height: 40.0,
+                  decoration: new BoxDecoration(
+                    color: Color(0xff3b5998),
+                    shape: BoxShape.circle,
+                  ),
+                ),
+                Positioned(
+                  left: 10,
+                  top: 10,
+                  child: Container(
+                      child: Image.asset(
+                    'asset/facebook.png',
+                    height: 20,
+                    width: 20,
+                  )),
+                ),
+              ]),
+            ),
+          ),
+        if (instagramUrl != null)
+          GestureDetector(
+            onTap: () => launch(instagramUrl),
+            child: Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: Stack(children: [
+                Container(
+                  width: 40,
+                  height: 40,
+                  decoration: new BoxDecoration(
+                    color: Color(0xffC13584),
+                    shape: BoxShape.circle,
+                  ),
+                ),
+                Positioned(
+                  left: 10,
+                  top: 10,
+                  child: Container(
+                      child: Image.asset(
+                    'asset/instagram.png',
+                    height: 20,
+                    width: 20,
+                  )),
+                ),
+              ]),
+            ),
+          ),
+        if (tiktokUrl != null)
+          GestureDetector(
+            onTap: () => launch(tiktokUrl),
+            child: Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: Stack(children: [
+                Container(
+                  width: 40,
+                  height: 40,
+                  decoration: new BoxDecoration(
+                    color: Color(0xff010101),
+                    shape: BoxShape.circle,
+                  ),
+                ),
+                Positioned(
+                  left: 10,
+                  top: 10,
+                  child: Container(
+                      child: Image.asset(
+                    'asset/tiktok.png',
+                    height: 20,
+                    width: 20,
+                  )),
+                ),
+              ]),
+            ),
+          ),
+        if (twitterUrl != null)
+          GestureDetector(
+            onTap: () => launch(twitterUrl),
+            child: Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: Stack(children: [
+                Container(
+                  width: 40,
+                  height: 40,
+                  decoration: new BoxDecoration(
+                    color: Color(0xff1DA1F2),
+                    shape: BoxShape.circle,
+                  ),
+                ),
+                Positioned(
+                  left: 10,
+                  top: 10,
+                  child: Container(
+                      child: Image.asset(
+                    'asset/twitter.png',
+                    height: 20,
+                    width: 20,
+                  )),
+                ),
+              ]),
+            ),
+          ),
+        if (snapchatUrl != null)
+          GestureDetector(
+            onTap: () => launch(snapchatUrl),
+            child: Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: Stack(children: [
+                Container(
+                  width: 40,
+                  height: 40,
+                  decoration: new BoxDecoration(
+                    color: Color(0xffFFFC00),
+                    shape: BoxShape.circle,
+                  ),
+                ),
+                Positioned(
+                  left: 5,
+                  top: 5,
+                  child: Container(
+                      child: Image.asset(
+                    'asset/snapchat.png',
+                    height: 30,
+                    width: 30,
+                  )),
+                ),
+              ]),
+            ),
+          ),
+        if (whatsappUrl != null)
+          GestureDetector(
+            onTap: () => launch(whatsappUrl),
+            child: Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: Stack(children: [
+                Container(
+                  width: 40,
+                  height: 40,
+                  decoration: new BoxDecoration(
+                    color: Color(0xff25D366),
+                    shape: BoxShape.circle,
+                  ),
+                ),
+                Positioned(
+                  left: 10,
+                  top: 10,
+                  child: Container(
+                      child: Image.asset(
+                    'asset/whatsapp.png',
+                    height: 20,
+                    width: 20,
+                  )),
+                ),
+              ]),
+            ),
+          ),
+        if (wechatUrl != null)
+          GestureDetector(
+            onTap: () => launch(wechatUrl),
+            child: Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: Stack(children: [
+                Container(
+                  width: 40,
+                  height: 40,
+                  decoration: new BoxDecoration(
+                    color: Color(0xff7bb32e),
+                    shape: BoxShape.circle,
+                  ),
+                ),
+                Positioned(
+                  left: 10,
+                  top: 10,
+                  child: Container(
+                      child: Image.asset(
+                    'asset/wechat.png',
+                    height: 20,
+                    width: 20,
+                  )),
+                ),
+              ]),
+            ),
+          ),
+        if (lineUrl != null)
+          GestureDetector(
+            onTap: () => launch(lineUrl),
+            child: Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: Stack(children: [
+                Container(
+                  width: 40,
+                  height: 40,
+                  decoration: new BoxDecoration(
+                    color: Color(0xff00B900),
+                    shape: BoxShape.circle,
+                  ),
+                ),
+                Positioned(
+                  left: 5,
+                  top: 5,
+                  child: Container(
+                      child: Image.asset(
+                    'asset/line.png',
+                    height: 30,
+                    width: 30,
+                  )),
+                ),
+              ]),
+            ),
+          ),
+      ],
+    ),
+  );
 }

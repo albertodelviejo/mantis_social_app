@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import '../../app_localizations.dart';
 import '../Tab.dart';
 import 'otp.dart';
 import '../../util/color.dart';
@@ -99,7 +100,8 @@ class _VerificationState extends State<Verification> {
                   const EdgeInsets.symmetric(horizontal: 10.0, vertical: 50),
               child: RichText(
                 text: TextSpan(
-                    text: "Enter the code sent to ",
+                    text: AppLocalizations.of(context)
+                        .translate('otp_verification_enter_code'),
                     children: [
                       TextSpan(
                           text: widget.phoneNumber,
@@ -133,11 +135,13 @@ class _VerificationState extends State<Verification> {
             RichText(
               textAlign: TextAlign.center,
               text: TextSpan(
-                  text: "Didn't receive the code? ",
+                  text: AppLocalizations.of(context)
+                      .translate('otp_verification_not_received_question'),
                   style: TextStyle(color: Colors.black54, fontSize: 15),
                   children: [
                     TextSpan(
-                        text: " RESEND",
+                        text: AppLocalizations.of(context)
+                            .translate('otp_verification_resend'),
                         recognizer: onTapRecognizer,
                         style: TextStyle(
                             color: Color(0xFF91D3B3),
@@ -166,7 +170,8 @@ class _VerificationState extends State<Verification> {
                   width: MediaQuery.of(context).size.width * .75,
                   child: Center(
                       child: Text(
-                    "VERIFY",
+                    AppLocalizations.of(context)
+                        .translate('otp_verification_verify'),
                     style: TextStyle(
                         fontSize: 18,
                         color: textColor,
@@ -226,7 +231,8 @@ class _VerificationState extends State<Verification> {
                                           height: 100,
                                         ),
                                         Text(
-                                          "Verified\n Successfully",
+                                          AppLocalizations.of(context).translate(
+                                              'otp_verification_succesfully'),
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                               decoration: TextDecoration.none,

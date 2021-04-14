@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../app_localizations.dart';
 import 'UserDOB.dart';
 import 'UserName.dart';
 import '../util/color.dart';
@@ -31,7 +32,8 @@ class _WelcomeState extends State<Welcome> {
                           height: 150,
                         ),
                         Text(
-                          "hookup4u",
+                          AppLocalizations.of(context)
+                              .translate('welcome_title'),
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               fontSize: 35,
@@ -42,7 +44,8 @@ class _WelcomeState extends State<Welcome> {
                         ListTile(
                           contentPadding: EdgeInsets.all(8),
                           title: Text(
-                            "Welcome to hookup4u.\nPlease follow these House Rules.",
+                            AppLocalizations.of(context)
+                                .translate('welcome_please'),
                             style: TextStyle(
                                 fontSize: 18, fontWeight: FontWeight.bold),
                           ),
@@ -50,12 +53,14 @@ class _WelcomeState extends State<Welcome> {
                         ListTile(
                           contentPadding: EdgeInsets.all(8),
                           title: Text(
-                            "Be yourself.",
+                            AppLocalizations.of(context)
+                                .translate('welcome_yourself'),
                             style: TextStyle(
                                 fontSize: 18, fontWeight: FontWeight.bold),
                           ),
                           subtitle: Text(
-                            "Make sure your photos, age, and bio are true to who you are.",
+                            AppLocalizations.of(context)
+                                .translate('welcome_true'),
                             style: TextStyle(
                               fontSize: 17,
                             ),
@@ -64,12 +69,14 @@ class _WelcomeState extends State<Welcome> {
                         ListTile(
                           contentPadding: EdgeInsets.all(8),
                           title: Text(
-                            "Play it cool.",
+                            AppLocalizations.of(context)
+                                .translate('welcome_cool'),
                             style: TextStyle(
                                 fontSize: 18, fontWeight: FontWeight.bold),
                           ),
                           subtitle: Text(
-                            "Respect other and treat them as you would like to be treated",
+                            AppLocalizations.of(context)
+                                .translate('welcome_respect'),
                             style: TextStyle(
                               fontSize: 17,
                             ),
@@ -78,12 +85,14 @@ class _WelcomeState extends State<Welcome> {
                         ListTile(
                           contentPadding: EdgeInsets.all(8),
                           title: Text(
-                            "Stay safe.",
+                            AppLocalizations.of(context)
+                                .translate('welcome_safe'),
                             style: TextStyle(
                                 fontSize: 18, fontWeight: FontWeight.bold),
                           ),
                           subtitle: Text(
-                            "Don't be too quick to give out personal information.",
+                            AppLocalizations.of(context)
+                                .translate('welcome_not_quick'),
                             style: TextStyle(
                               fontSize: 17,
                             ),
@@ -92,12 +101,14 @@ class _WelcomeState extends State<Welcome> {
                         ListTile(
                           contentPadding: EdgeInsets.all(8),
                           title: Text(
-                            "Be proactive.",
+                            AppLocalizations.of(context)
+                                .translate('welcome_proactive'),
                             style: TextStyle(
                                 fontSize: 18, fontWeight: FontWeight.bold),
                           ),
                           subtitle: Text(
-                            "Always report bad behavior.",
+                            AppLocalizations.of(context)
+                                .translate('welcome_report'),
                             style: TextStyle(
                               fontSize: 17,
                             ),
@@ -130,7 +141,8 @@ class _WelcomeState extends State<Welcome> {
                         width: MediaQuery.of(context).size.width * .75,
                         child: Center(
                             child: Text(
-                          "GOT IT",
+                          AppLocalizations.of(context)
+                              .translate('welcome_got_it'),
                           style: TextStyle(
                               fontSize: 15,
                               color: textColor,

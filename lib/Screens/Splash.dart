@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mantissocial/util/color.dart';
+import '../util/color.dart';
 
 class Splash extends StatefulWidget {
   @override

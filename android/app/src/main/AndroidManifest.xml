@@ -64,7 +64,7 @@
             android:value="default_notification_channel_id"/>
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-0000000000000000~0000000000"/>
+            android:value="ca-app-pub-4953666659576409~6645357645ad"/>
          </application>
 
 <uses-permission android:name="com.android.vending.BILLING" />        

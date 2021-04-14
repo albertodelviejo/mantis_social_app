@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
+import '../../app_localizations.dart';
 import '../UpdateLocation.dart';
 import '../auth/login.dart';
 import '../../ads/ads.dart';
@@ -32,7 +33,7 @@ class _SettingsState extends State<Settings> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   Ads _ads = new Ads();
   BannerAd _ad;
-  FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+  FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
   @override
   void dispose() {
     _ads.disable(_ad);
@@ -91,7 +92,7 @@ class _SettingsState extends State<Settings> {
       backgroundColor: primaryColor,
       appBar: AppBar(
           title: Text(
-            "Settings",
+            AppLocalizations.of(context).translate('profile_settings'),
             style: TextStyle(color: Colors.white),
           ),
           leading: IconButton(
@@ -117,7 +118,7 @@ class _SettingsState extends State<Settings> {
                 Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: Text(
-                    "Account settings",
+                    AppLocalizations.of(context).translate('settings_account'),
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
                   ),
                 ),
@@ -129,7 +130,8 @@ class _SettingsState extends State<Settings> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
-                          Text("Phone Number"),
+                          Text(AppLocalizations.of(context)
+                              .translate('settings_phone_number')),
                           Padding(
                             padding: const EdgeInsets.only(
                               left: 20,
@@ -137,7 +139,8 @@ class _SettingsState extends State<Settings> {
                             child: Text(
                               widget.currentUser.phoneNumber != null
                                   ? "${widget.currentUser.phoneNumber}"
-                                  : "Verify Now",
+                                  : AppLocalizations.of(context)
+                                      .translate('settings_verify'),
                               style: TextStyle(color: secondryColor),
                             ),
                           ),
@@ -158,13 +161,14 @@ class _SettingsState extends State<Settings> {
                       },
                     ),
                   )),
-                  subtitle:
-                      Text("Verify a phone number to secure your account"),
+                  subtitle: Text(AppLocalizations.of(context)
+                      .translate('settings_verify_phone_number')),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: Text(
-                    "Discovery settings",
+                    AppLocalizations.of(context)
+                        .translate('settings_discovery'),
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
                   ),
                 ),
@@ -174,7 +178,8 @@ class _SettingsState extends State<Settings> {
                     child: ExpansionTile(
                       key: UniqueKey(),
                       leading: Text(
-                        "Current location : ",
+                        AppLocalizations.of(context)
+                            .translate('settings_current_location'),
                         style: TextStyle(
                           fontSize: 14,
                         ),
@@ -200,7 +205,8 @@ class _SettingsState extends State<Settings> {
                               ),
                               InkWell(
                                 child: Text(
-                                  "Change location",
+                                  AppLocalizations.of(context)
+                                      .translate('settings_change_location'),
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     color: Colors.blue,
@@ -235,7 +241,8 @@ class _SettingsState extends State<Settings> {
                     left: 15,
                   ),
                   child: Text(
-                    "Change your location to see members in other city",
+                    AppLocalizations.of(context)
+                        .translate('settings_change_location_to'),
                     style: TextStyle(color: Colors.black54),
                   ),
                 ),
@@ -248,38 +255,113 @@ class _SettingsState extends State<Settings> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(
-                            "Show me",
+                            AppLocalizations.of(context)
+                                .translate('settings_show_me'),
                             style: TextStyle(
                                 fontSize: 18,
                                 color: primaryColor,
                                 fontWeight: FontWeight.w500),
                           ),
                           ListTile(
-                            title: DropdownButton(
-                              iconEnabledColor: primaryColor,
-                              iconDisabledColor: secondryColor,
-                              isExpanded: true,
-                              items: [
-                                DropdownMenuItem(
-                                  child: Text("Man"),
-                                  value: "man",
-                                ),
-                                DropdownMenuItem(
-                                    child: Text("Woman"), value: "woman"),
-                                DropdownMenuItem(
-                                    child: Text("Everyone"), value: "everyone"),
-                              ],
-                              onChanged: (val) {
-                                changeValues.addAll({
-                                  'showGender': val,
-                                });
-                                setState(() {
-                                  _showMe = val;
-                                });
-                              },
-                              value: _showMe,
-                            ),
-                          ),
+                              title: Row(
+                            children: [
+                              Checkbox(
+                                  value: _showMe.contains("man"),
+                                  onChanged: (isSelected) {
+                                    setState(() {
+                                      if (isSelected) {
+                                        _showMe.add("man");
+                                        if (_showMe.contains("everyone")) {
+                                          _showMe.remove("everyone");
+                                        }
+                                      } else {
+                                        if (_showMe.length > 1) {
+                                          _showMe.remove("man");
+                                        }
+                                      }
+                                      changeValues
+                                          .addAll({'showGender': _showMe});
+                                    });
+                                  }),
+                              Text(AppLocalizations.of(context)
+                                  .translate('edit_profile_man'))
+                            ],
+                          )),
+                          ListTile(
+                              title: Row(
+                            children: [
+                              Checkbox(
+                                  value: _showMe.contains("woman"),
+                                  onChanged: (isSelected) {
+                                    setState(() {
+                                      if (isSelected) {
+                                        _showMe.add("woman");
+                                        if (_showMe.contains("everyone")) {
+                                          _showMe.remove("everyone");
+                                        }
+                                      } else {
+                                        if (_showMe.length > 1) {
+                                          _showMe.remove("woman");
+                                        }
+                                      }
+                                      changeValues
+                                          .addAll({'showGender': _showMe});
+                                    });
+                                  }),
+                              Text(AppLocalizations.of(context)
+                                  .translate('edit_profile_woman'))
+                            ],
+                          )),
+                          ListTile(
+                              title: Row(
+                            children: [
+                              Checkbox(
+                                  value: _showMe.contains("transgender"),
+                                  onChanged: (isSelected) {
+                                    setState(() {
+                                      if (isSelected) {
+                                        _showMe.add("transgender");
+                                        if (_showMe.contains("everyone")) {
+                                          _showMe.remove("everyone");
+                                        }
+                                      } else {
+                                        if (_showMe.length > 1) {
+                                          _showMe.remove("transgender");
+                                        }
+                                      }
+                                      changeValues
+                                          .addAll({'showGender': _showMe});
+                                    });
+                                  }),
+                              Text(AppLocalizations.of(context)
+                                  .translate('edit_profile_transgender'))
+                            ],
+                          )),
+                          ListTile(
+                              title: Row(
+                            children: [
+                              Checkbox(
+                                  value: _showMe.contains("everyone"),
+                                  onChanged: (isSelected) {
+                                    setState(() {
+                                      if (isSelected) {
+                                        _showMe.add("everyone");
+                                        _showMe.remove("man");
+                                        _showMe.remove("woman");
+                                        _showMe.remove("transgender");
+                                      } else {
+                                        if (_showMe.length > 1) {
+                                          _showMe.remove("everyone");
+                                        }
+                                      }
+                                      changeValues
+                                          .addAll({'showGender': _showMe});
+                                    });
+                                  }),
+                              Text(AppLocalizations.of(context)
+                                  .translate('settings_everyone'))
+                            ],
+                          ))
                         ],
                       ),
                     ),
@@ -292,7 +374,8 @@ class _SettingsState extends State<Settings> {
                       padding: const EdgeInsets.all(8.0),
                       child: ListTile(
                         title: Text(
-                          "Maximum distance",
+                          AppLocalizations.of(context)
+                              .translate('settings_maximum_distance'),
                           style: TextStyle(
                               fontSize: 18,
                               color: primaryColor,
@@ -328,7 +411,8 @@ class _SettingsState extends State<Settings> {
                       padding: const EdgeInsets.all(8.0),
                       child: ListTile(
                         title: Text(
-                          "Age range",
+                          AppLocalizations.of(context)
+                              .translate('settings_age_range'),
                           style: TextStyle(
                               fontSize: 18,
                               color: primaryColor,
@@ -364,7 +448,8 @@ class _SettingsState extends State<Settings> {
                 ),
                 ListTile(
                   title: Text(
-                    "App settings",
+                    AppLocalizations.of(context)
+                        .translate('settings_app_settings'),
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
                   ),
                   subtitle: Card(
@@ -377,7 +462,8 @@ class _SettingsState extends State<Settings> {
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
-                              "Notifications",
+                              AppLocalizations.of(context)
+                                  .translate('settings_notifications'),
                               style: TextStyle(
                                   fontSize: 18,
                                   color: primaryColor,
@@ -386,7 +472,8 @@ class _SettingsState extends State<Settings> {
                           ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Text("Push notifications"),
+                            child: Text(AppLocalizations.of(context)
+                                .translate('settings_notifications_push')),
                           ),
                         ],
                       ),
@@ -401,7 +488,8 @@ class _SettingsState extends State<Settings> {
                         padding: const EdgeInsets.all(18.0),
                         child: Center(
                           child: Text(
-                            "Invite your friends",
+                            AppLocalizations.of(context)
+                                .translate('settings_invite_friends'),
                             style: TextStyle(
                                 color: primaryColor,
                                 fontSize: 15,
@@ -437,9 +525,10 @@ class _SettingsState extends State<Settings> {
                         context: context,
                         builder: (BuildContext context) {
                           return AlertDialog(
-                            title: Text('Logout'),
-                            content:
-                                Text('Do you want to logout your account?'),
+                            title: Text(AppLocalizations.of(context)
+                                .translate('settings_logout')),
+                            content: Text(AppLocalizations.of(context)
+                                .translate('settings_logout_question')),
                             actions: <Widget>[
                               FlatButton(
                                 onPressed: () =>
@@ -449,7 +538,7 @@ class _SettingsState extends State<Settings> {
                               FlatButton(
                                 onPressed: () async {
                                   await _auth.signOut().whenComplete(() {
-                                    _firebaseMessaging.deleteInstanceID();
+                                    _firebaseMessaging.deleteToken();
                                     Navigator.pushReplacement(
                                       context,
                                       CupertinoPageRoute(
@@ -475,7 +564,8 @@ class _SettingsState extends State<Settings> {
                         padding: const EdgeInsets.all(18.0),
                         child: Center(
                           child: Text(
-                            "Delete Account",
+                            AppLocalizations.of(context)
+                                .translate('settings_delete_account'),
                             style: TextStyle(
                                 color: primaryColor,
                                 fontSize: 15,
@@ -489,9 +579,10 @@ class _SettingsState extends State<Settings> {
                         context: context,
                         builder: (BuildContext context) {
                           return AlertDialog(
-                            title: Text('Delete Account'),
-                            content:
-                                Text('Do you want to delete your account?'),
+                            title: Text(AppLocalizations.of(context)
+                                .translate('settings_delete_account')),
+                            content: Text(AppLocalizations.of(context)
+                                .translate('settings_delete_account_question')),
                             actions: <Widget>[
                               FlatButton(
                                 onPressed: () =>
@@ -559,7 +650,8 @@ class _SettingsState extends State<Settings> {
                     title: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                        'New address:',
+                        AppLocalizations.of(context)
+                            .translate('settings_new_address'),
                         style: TextStyle(
                             color: Colors.black,
                             fontSize: 18,
@@ -592,7 +684,7 @@ class _SettingsState extends State<Settings> {
                 RaisedButton(
                   color: Colors.white,
                   child: Text(
-                    "Confirm",
+                    AppLocalizations.of(context).translate('settings_confirm'),
                     style: TextStyle(color: primaryColor),
                   ),
                   onPressed: () async {

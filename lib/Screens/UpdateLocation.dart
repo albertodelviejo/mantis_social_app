@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mapbox_autocomplete/flutter_mapbox_autocomplete.dart';
+import 'package:mapbox_autocomplete/mapbox_autocomplete.dart';
+import '../app_localizations.dart';
 import 'seach_location.dart';
 import 'package:location/location.dart' as loc;
 import 'package:geocoder/geocoder.dart';
@@ -30,12 +31,15 @@ class _UpdateLocationState extends State<UpdateLocation> {
         automaticallyImplyLeading: false,
         title: ListTile(
           title: Text(
-            "Use current location",
+            AppLocalizations.of(context).translate('update_location'),
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           ),
           subtitle: Text(_newAddress != null
-              ? _newAddress['PlaceName'] ?? 'Fetching..'
-              : 'Unable to load...'),
+              ? _newAddress['PlaceName'] ??
+                  AppLocalizations.of(context)
+                      .translate('update_location_fetching')
+              : AppLocalizations.of(context)
+                  .translate('update_location_unable_load')),
           leading: Icon(
             Icons.location_searching_rounded,
             color: Colors.white,
@@ -61,8 +65,8 @@ class _UpdateLocationState extends State<UpdateLocation> {
           language: 'en',
           closeOnSelect: false,
           apiKey: mapboxApi,
+          hint: AppLocalizations.of(context).translate('update_location_hint'),
           limit: 10,
-          hint: 'Enter your city name',
           onSelect: (place) {
             Map obj = {};
             obj['PlaceName'] = place.placeName;

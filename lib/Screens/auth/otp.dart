@@ -3,6 +3,7 @@ import 'package:country_code_picker/country_code_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../../app_localizations.dart';
 import '../Tab.dart';
 import 'otp_verification.dart';
 import '../../util/color.dart';
@@ -79,7 +80,8 @@ class _OTPState extends State<OTP> {
                           height: 100,
                         ),
                         Text(
-                          "Phone Number\nChanged\nSuccessfully",
+                          AppLocalizations.of(context)
+                              .translate('otp_phone_number_changed'),
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               decoration: TextDecoration.none,
@@ -134,7 +136,8 @@ class _OTPState extends State<OTP> {
                             colorBlendMode: BlendMode.color,
                           ),
                           Text(
-                            "Verified\n Successfully",
+                            AppLocalizations.of(context)
+                                .translate('otp_verified_successfully'),
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 decoration: TextDecoration.none,
@@ -244,14 +247,13 @@ class _OTPState extends State<OTP> {
               // ),
               ListTile(
                 title: Text(
-                  "Verify Your Number",
+                  AppLocalizations.of(context).translate('otp_verify_number'),
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 27, fontWeight: FontWeight.bold),
                 ),
                 subtitle: Text(
-                  r"""Please enter Your mobile Number to
-receive a verification code. Message and data 
-rates may apply.""",
+                  AppLocalizations.of(context)
+                      .translate('otp_verify_number_text'),
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400),
                 ),

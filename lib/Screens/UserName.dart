@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import '../app_localizations.dart';
 import 'UserDOB.dart';
 import '../ads/ads.dart';
 import '../util/color.dart';
@@ -73,7 +74,7 @@ class _UserNameState extends State<UserName> {
                 children: <Widget>[
                   Padding(
                     child: Text(
-                      "My first\nname is",
+                      AppLocalizations.of(context).translate('user_name_name'),
                       style: TextStyle(fontSize: 40),
                     ),
                     padding: EdgeInsets.only(left: 50, top: 120),
@@ -86,10 +87,12 @@ class _UserNameState extends State<UserName> {
                   child: TextFormField(
                     style: TextStyle(fontSize: 23),
                     decoration: InputDecoration(
-                      hintText: "Enter your first name",
+                      hintText: AppLocalizations.of(context)
+                          .translate('user_name_hint'),
                       focusedBorder: UnderlineInputBorder(
                           borderSide: BorderSide(color: primaryColor)),
-                      helperText: "This is how it will appear in App.",
+                      helperText: AppLocalizations.of(context)
+                          .translate('user_name_helper'),
                       helperStyle:
                           TextStyle(color: secondryColor, fontSize: 15),
                     ),
@@ -124,7 +127,8 @@ class _UserNameState extends State<UserName> {
                               width: MediaQuery.of(context).size.width * .75,
                               child: Center(
                                   child: Text(
-                                "CONTINUE",
+                                AppLocalizations.of(context)
+                                    .translate('search_location_continue_cap'),
                                 style: TextStyle(
                                     fontSize: 15,
                                     color: textColor,
@@ -155,7 +159,8 @@ class _UserNameState extends State<UserName> {
                               width: MediaQuery.of(context).size.width * .75,
                               child: Center(
                                   child: Text(
-                                "CONTINUE",
+                                AppLocalizations.of(context)
+                                    .translate('search_location_continue_cap'),
                                 style: TextStyle(
                                     fontSize: 15,
                                     color: secondryColor,

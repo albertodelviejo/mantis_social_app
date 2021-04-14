@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import '../../app_localizations.dart';
 import '../Information.dart';
 import '../Payment/paymentDetails.dart';
 import 'EditProfile.dart';
@@ -10,39 +11,6 @@ import '../../models/user_model.dart';
 import '../../util/color.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import '../Payment/subscriptions.dart';
-
-final List adds = [
-  {
-    'icon': Icons.whatshot,
-    'color': Colors.indigo,
-    'title': "Get matches faster",
-    'subtitle': "Boost your profile once a month",
-  },
-  {
-    'icon': Icons.favorite,
-    'color': Colors.lightBlueAccent,
-    'title': "more likes",
-    'subtitle': "Get free rewindes",
-  },
-  {
-    'icon': Icons.star_half,
-    'color': Colors.amber,
-    'title': "Increase your chances",
-    'subtitle': "Get unlimited free likes",
-  },
-  {
-    'icon': Icons.location_on,
-    'color': Colors.purple,
-    'title': "Swipe around the world",
-    'subtitle': "Passport to anywhere with hookup4u",
-  },
-  {
-    'icon': Icons.vpn_key,
-    'color': Colors.orange,
-    'title': "Control your profile",
-    'subtitle': "highly secured",
-  }
-];
 
 class Profile extends StatefulWidget {
   final UserModel currentUser;
@@ -65,6 +33,48 @@ class _ProfileState extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
+    final List adds = [
+      {
+        'icon': Icons.whatshot,
+        'color': Colors.indigo,
+        'title':
+            AppLocalizations.of(context).translate('profile_adds_match_title'),
+        'subtitle': AppLocalizations.of(context)
+            .translate('profile_adds_match_subtitle'),
+      },
+      {
+        'icon': Icons.favorite,
+        'color': Colors.lightBlueAccent,
+        'title':
+            AppLocalizations.of(context).translate('profile_adds_rew_title'),
+        'subtitle':
+            AppLocalizations.of(context).translate('profile_adds_rew_subtitle'),
+      },
+      {
+        'icon': Icons.star_half,
+        'color': Colors.amber,
+        'title':
+            AppLocalizations.of(context).translate('profile_adds_like_title'),
+        'subtitle': AppLocalizations.of(context)
+            .translate('profile_adds_like_subtitle'),
+      },
+      {
+        'icon': Icons.location_on,
+        'color': Colors.purple,
+        'title': AppLocalizations.of(context)
+            .translate('profile_adds_location_title'),
+        'subtitle': AppLocalizations.of(context)
+            .translate('profile_adds_location_subtitle'),
+      },
+      {
+        'icon': Icons.vpn_key,
+        'color': Colors.orange,
+        'title': AppLocalizations.of(context)
+            .translate('profile_adds_security_title'),
+        'subtitle': AppLocalizations.of(context)
+            .translate('profile_adds_security_subtitle'),
+      }
+    ];
     return Scaffold(
       backgroundColor: primaryColor,
       body: Container(
@@ -124,7 +134,8 @@ class _ProfileState extends State<Profile> {
                                       size: 30,
                                     ),
                                     Text(
-                                      "Enable to load",
+                                      AppLocalizations.of(context).translate(
+                                          'edit_profile_enable_to_load'),
                                       style: TextStyle(
                                         color: Colors.black,
                                       ),
@@ -219,7 +230,8 @@ class _ProfileState extends State<Profile> {
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
-                              "Add media",
+                              AppLocalizations.of(context)
+                                  .translate('edit_profile_add_media'),
                               style: TextStyle(color: secondryColor),
                             ),
                           ),
@@ -255,7 +267,8 @@ class _ProfileState extends State<Profile> {
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Text(
-                                "Settings",
+                                AppLocalizations.of(context)
+                                    .translate('profile_settings'),
                                 style: TextStyle(color: secondryColor),
                               ),
                             )
@@ -287,7 +300,8 @@ class _ProfileState extends State<Profile> {
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Text(
-                                "Edit Info",
+                                AppLocalizations.of(context)
+                                    .translate('profile_edit_info'),
                                 style: TextStyle(color: secondryColor),
                               ),
                             ),
@@ -397,8 +411,10 @@ class _ProfileState extends State<Profile> {
                     child: Center(
                         child: Text(
                       widget.isPuchased && widget.purchases != null
-                          ? "Check Payment Details"
-                          : "Subscribe Plan",
+                          ? AppLocalizations.of(context)
+                              .translate('profile_check_payment_details')
+                          : AppLocalizations.of(context)
+                              .translate('profile_check_subscribe_plan'),
                       style: TextStyle(
                           fontSize: 15,
                           color: textColor,

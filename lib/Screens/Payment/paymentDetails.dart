@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../../app_localizations.dart';
 import '../../util/color.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 
@@ -12,7 +13,8 @@ class PaymentDetails extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: Text("Subscription details"),
+          title: Text(AppLocalizations.of(context)
+              .translate('payments_subscription_details')),
           elevation: 0,
           leading: IconButton(
             icon: Icon(Icons.arrow_back_ios),
@@ -39,7 +41,9 @@ class PaymentDetails extends StatelessWidget {
                     Row(children: <Widget>[
                       Padding(
                         padding: const EdgeInsets.all(38.0),
-                        child: Text("Payment Summary:",
+                        child: Text(
+                            AppLocalizations.of(context)
+                                .translate('payments_summary'),
                             style: TextStyle(
                                 color: primaryColor,
                                 fontWeight: FontWeight.bold,
@@ -60,7 +64,8 @@ class PaymentDetails extends StatelessWidget {
                                           columns: [
                                             DataColumn(
                                                 label: Text(
-                                              "Plan",
+                                              AppLocalizations.of(context)
+                                                  .translate('payments_plan'),
                                               style: TextStyle(
                                                 //   color: primaryColor,
                                                 fontSize: 15,
@@ -68,7 +73,10 @@ class PaymentDetails extends StatelessWidget {
                                               ),
                                             )),
                                             DataColumn(
-                                                label: Text("Details",
+                                                label: Text(
+                                                    AppLocalizations.of(context)
+                                                        .translate(
+                                                            'paymnets_details'),
                                                     style: TextStyle(
                                                       fontSize: 15,
                                                       // color: primaryColor,
@@ -78,7 +86,10 @@ class PaymentDetails extends StatelessWidget {
                                           ],
                                           rows: [
                                             DataRow(cells: [
-                                              DataCell(Text("Transaction_id",
+                                              DataCell(Text(
+                                                  AppLocalizations.of(context)
+                                                      .translate(
+                                                          'payments_transition_id'),
                                                   style: TextStyle(
                                                     fontSize: 15,
                                                   ))),
@@ -89,7 +100,10 @@ class PaymentDetails extends StatelessWidget {
                                                       ))),
                                             ]),
                                             DataRow(cells: [
-                                              DataCell(Text("product_id",
+                                              DataCell(Text(
+                                                  AppLocalizations.of(context)
+                                                      .translate(
+                                                          'payments_product_id'),
                                                   style: TextStyle(
                                                     fontSize: 15,
                                                   ))),
@@ -101,7 +115,10 @@ class PaymentDetails extends StatelessWidget {
                                                       ))),
                                             ]),
                                             DataRow(cells: [
-                                              DataCell(Text("Subscribed on",
+                                              DataCell(Text(
+                                                  AppLocalizations.of(context)
+                                                      .translate(
+                                                          'payments_subscribed_on'),
                                                   style: TextStyle(
                                                     fontSize: 15,
                                                   ))),
@@ -117,15 +134,24 @@ class PaymentDetails extends StatelessWidget {
                                                   ))),
                                             ]),
                                             DataRow(cells: [
-                                              DataCell(Text("Status",
+                                              DataCell(Text(
+                                                  AppLocalizations.of(context)
+                                                      .translate(
+                                                          'payments_status'),
                                                   style: TextStyle(
                                                     fontSize: 15,
                                                   ))),
                                               DataCell(Text(
                                                   index.billingClientPurchase
                                                           .isAutoRenewing
-                                                      ? "Active"
-                                                      : "Cancelled",
+                                                      ? AppLocalizations.of(
+                                                              context)
+                                                          .translate(
+                                                              'payments_active')
+                                                      : AppLocalizations.of(
+                                                              context)
+                                                          .translate(
+                                                              'payments_cancelled'),
                                                   style: TextStyle(
                                                     color: index
                                                             .billingClientPurchase
@@ -157,7 +183,8 @@ class PaymentDetails extends StatelessWidget {
                               borderRadius: BorderRadius.circular(25)),
                           child: Center(
                               child: Text(
-                            "Back",
+                            AppLocalizations.of(context)
+                                .translate('payments_back'),
                             style: TextStyle(fontSize: 17, color: Colors.white),
                           )),
                         ),

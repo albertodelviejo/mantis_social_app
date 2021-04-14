@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../app_localizations.dart';
 import 'recent_chats.dart';
 import '../../models/user_model.dart';
 import '../../util/color.dart';
@@ -39,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: primaryColor,
         automaticallyImplyLeading: false,
         title: Text(
-          'Messages',
+          AppLocalizations.of(context).translate('home_screen_appbar'),
           style: TextStyle(
             color: Colors.white,
             fontSize: 18.0,
@@ -68,7 +69,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 Padding(
                   padding: const EdgeInsets.all(20),
                   child: Text(
-                    'Recent messages',
+                    AppLocalizations.of(context)
+                        .translate('home_screen_recent_messages'),
                     style: TextStyle(
                       color: primaryColor,
                       fontSize: 18.0,

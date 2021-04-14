@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../app_localizations.dart';
 import '../util/color.dart';
 
 class BlockUser extends StatelessWidget {
@@ -26,13 +27,14 @@ class BlockUser extends StatelessWidget {
                       )),
                 )),
             Text(
-              "sorry, you can't access the application!",
+              AppLocalizations.of(context)
+                  .translate('block_user_by_admin_sorry'),
               style: TextStyle(color: primaryColor),
             ),
           ],
         ),
-        content: Text(
-            "you're blocked by the admin and your profile will also not appear for other users."),
+        content:
+            Text(AppLocalizations.of(context).translate('block_user_message')),
       ),
     );
   }

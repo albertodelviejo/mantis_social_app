@@ -7,6 +7,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../../app_localizations.dart';
 import '../../models/user_model.dart';
 import '../../util/color.dart';
 import 'package:image_cropper/image_cropper.dart';
@@ -27,6 +28,14 @@ class EditProfileState extends State<EditProfile> {
   final TextEditingController livingCtlr = new TextEditingController();
   final TextEditingController jobCtlr = new TextEditingController();
   final TextEditingController universityCtlr = new TextEditingController();
+  final TextEditingController facebookCtlr = new TextEditingController();
+  final TextEditingController instagramCtlr = new TextEditingController();
+  final TextEditingController tiktokCtlr = new TextEditingController();
+  final TextEditingController twitterCtlr = new TextEditingController();
+  final TextEditingController lineCtlr = new TextEditingController();
+  final TextEditingController whatsappCtlr = new TextEditingController();
+  final TextEditingController snapchatCtlr = new TextEditingController();
+  final TextEditingController wechatCtlr = new TextEditingController();
   bool visibleAge = false;
   bool visibleDistance = true;
 
@@ -42,6 +51,14 @@ class EditProfileState extends State<EditProfile> {
     livingCtlr.text = widget.currentUser.editInfo['living_in'];
     universityCtlr.text = widget.currentUser.editInfo['university'];
     jobCtlr.text = widget.currentUser.editInfo['job_title'];
+    instagramCtlr.text = widget.currentUser.editInfo['instagram_url'];
+    facebookCtlr.text = widget.currentUser.editInfo['facebook_url'];
+    tiktokCtlr.text = widget.currentUser.editInfo['tiktok_url'];
+    twitterCtlr.text = widget.currentUser.editInfo['twitter_url'];
+    lineCtlr.text = widget.currentUser.editInfo['line_url'];
+    whatsappCtlr.text = widget.currentUser.editInfo['whatsapp_url'];
+    snapchatCtlr.text = widget.currentUser.editInfo['snapchat_url'];
+    wechatCtlr.text = widget.currentUser.editInfo['wechat_url'];
     setState(() {
       showMe = widget.currentUser.editInfo['userGender'];
       visibleAge = widget.currentUser.editInfo['showMyAge'] ?? false;
@@ -76,10 +93,14 @@ class EditProfileState extends State<EditProfile> {
         context: context,
         builder: (BuildContext context) {
           return CupertinoAlertDialog(
-              title: Text(
-                  isProfilePicture ? "Update profile picture" : "Add pictures"),
+              title: Text(isProfilePicture
+                  ? AppLocalizations.of(context)
+                      .translate('edit_profile_update_picture')
+                  : AppLocalizations.of(context)
+                      .translate('edit_profile_add_picture')),
               content: Text(
-                "Select source",
+                AppLocalizations.of(context)
+                    .translate('edit_profile_select_source'),
               ),
               insetAnimationCurve: Curves.decelerate,
               actions: currentUser.imageUrl.length < 9
@@ -95,7 +116,8 @@ class EditProfileState extends State<EditProfile> {
                                 size: 28,
                               ),
                               Text(
-                                " Camera",
+                                AppLocalizations.of(context)
+                                    .translate('edit_profile_camera'),
                                 style: TextStyle(
                                     fontSize: 15,
                                     color: Colors.black,
@@ -131,7 +153,8 @@ class EditProfileState extends State<EditProfile> {
                                 size: 28,
                               ),
                               Text(
-                                " Gallery",
+                                AppLocalizations.of(context)
+                                    .translate('edit_profile_gallery'),
                                 style: TextStyle(
                                     fontSize: 15,
                                     color: Colors.black,
@@ -166,7 +189,8 @@ class EditProfileState extends State<EditProfile> {
                           children: <Widget>[
                             Icon(Icons.error),
                             Text(
-                              "Can't uplaod more than 9 pictures",
+                              AppLocalizations.of(context)
+                                  .translate('edit_profile_cant_more'),
                               style: TextStyle(
                                   fontSize: 15,
                                   color: Colors.black,
@@ -181,7 +205,8 @@ class EditProfileState extends State<EditProfile> {
 
   Future getImage(
       ImageSource imageSource, context, currentUser, isProfilePicture) async {
-    var image = await ImagePicker.pickImage(source: imageSource);
+    ImagePicker imagePicker = ImagePicker();
+    var image = await imagePicker.getImage(source: imageSource);
     if (image != null) {
       File croppedFile = await ImageCropper.cropImage(
           sourcePath: image.path,
@@ -261,7 +286,7 @@ class EditProfileState extends State<EditProfile> {
       appBar: AppBar(
           elevation: 0,
           title: Text(
-            "Edit Profile",
+            AppLocalizations.of(context).translate('edit_profile'),
             style: TextStyle(color: Colors.white),
           ),
           leading: IconButton(
@@ -349,7 +374,9 @@ class EditProfileState extends State<EditProfile> {
                                                     size: 25,
                                                   ),
                                                   Text(
-                                                    "Enable to load",
+                                                    AppLocalizations.of(context)
+                                                        .translate(
+                                                            'edit_profile_enable_to_load'),
                                                     style: TextStyle(
                                                       color: Colors.black,
                                                     ),
@@ -439,7 +466,8 @@ class EditProfileState extends State<EditProfile> {
                         width: 340,
                         child: Center(
                             child: Text(
-                          "Add media",
+                          AppLocalizations.of(context)
+                              .translate('edit_profile_add_media'),
                           style: TextStyle(
                               fontSize: 15,
                               color: textColor,
@@ -471,7 +499,8 @@ class EditProfileState extends State<EditProfile> {
                             cursorColor: primaryColor,
                             maxLines: 10,
                             minLines: 3,
-                            placeholder: "About you",
+                            placeholder: AppLocalizations.of(context)
+                                .translate('edit_profile_about_you'),
                             padding: EdgeInsets.all(10),
                             onChanged: (text) {
                               editInfo.addAll({'about': text});
@@ -480,7 +509,8 @@ class EditProfileState extends State<EditProfile> {
                         ),
                         ListTile(
                           title: Text(
-                            "Job title",
+                            AppLocalizations.of(context)
+                                .translate('edit_profile_job_title'),
                             style: TextStyle(
                                 fontWeight: FontWeight.w500,
                                 fontSize: 16,
@@ -489,7 +519,8 @@ class EditProfileState extends State<EditProfile> {
                           subtitle: CupertinoTextField(
                             controller: jobCtlr,
                             cursorColor: primaryColor,
-                            placeholder: "Add job title",
+                            placeholder: AppLocalizations.of(context)
+                                .translate('edit_profile_add_job_title'),
                             padding: EdgeInsets.all(10),
                             onChanged: (text) {
                               editInfo.addAll({'job_title': text});
@@ -497,17 +528,21 @@ class EditProfileState extends State<EditProfile> {
                           ),
                         ),
                         ListTile(
-                          title: Text(
-                            "Company",
-                            style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                fontSize: 16,
-                                color: Colors.black87),
-                          ),
+                          title: Padding(
+                              padding: const EdgeInsets.only(bottom: 5.0),
+                              child: Text(
+                                AppLocalizations.of(context)
+                                    .translate('edit_profile_company'),
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 16,
+                                    color: Colors.black87),
+                              )),
                           subtitle: CupertinoTextField(
                             controller: companyCtlr,
                             cursorColor: primaryColor,
-                            placeholder: "Add company",
+                            placeholder: AppLocalizations.of(context)
+                                .translate('edit_profile_add_company'),
                             padding: EdgeInsets.all(10),
                             onChanged: (text) {
                               editInfo.addAll({'company': text});
@@ -515,17 +550,22 @@ class EditProfileState extends State<EditProfile> {
                           ),
                         ),
                         ListTile(
-                          title: Text(
-                            "University",
-                            style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                fontSize: 16,
-                                color: Colors.black87),
+                          title: Padding(
+                            padding: const EdgeInsets.only(bottom: 5.0),
+                            child: Text(
+                              AppLocalizations.of(context)
+                                  .translate('edit_profile_university'),
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 16,
+                                  color: Colors.black87),
+                            ),
                           ),
                           subtitle: CupertinoTextField(
                             controller: universityCtlr,
                             cursorColor: primaryColor,
-                            placeholder: "Add university",
+                            placeholder: AppLocalizations.of(context)
+                                .translate('edit_profile_add_university'),
                             padding: EdgeInsets.all(10),
                             onChanged: (text) {
                               editInfo.addAll({'university': text});
@@ -533,17 +573,21 @@ class EditProfileState extends State<EditProfile> {
                           ),
                         ),
                         ListTile(
-                          title: Text(
-                            "Living in",
-                            style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                fontSize: 16,
-                                color: Colors.black87),
-                          ),
+                          title: Padding(
+                              padding: const EdgeInsets.only(bottom: 5.0),
+                              child: Text(
+                                AppLocalizations.of(context)
+                                    .translate('edit_profile_living_in'),
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 16,
+                                    color: Colors.black87),
+                              )),
                           subtitle: CupertinoTextField(
                             controller: livingCtlr,
                             cursorColor: primaryColor,
-                            placeholder: "Add city",
+                            placeholder: AppLocalizations.of(context)
+                                .translate('edit_profile_add_city'),
                             padding: EdgeInsets.all(10),
                             onChanged: (text) {
                               editInfo.addAll({'living_in': text});
@@ -554,7 +598,8 @@ class EditProfileState extends State<EditProfile> {
                           padding: const EdgeInsets.symmetric(vertical: 10),
                           child: ListTile(
                             title: Text(
-                              "I am",
+                              AppLocalizations.of(context)
+                                  .translate('edit_profile_i_am'),
                               style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   fontSize: 16,
@@ -566,13 +611,22 @@ class EditProfileState extends State<EditProfile> {
                               isExpanded: true,
                               items: [
                                 DropdownMenuItem(
-                                  child: Text("Man"),
+                                  child: Text(AppLocalizations.of(context)
+                                      .translate('edit_profile_man')),
                                   value: "man",
                                 ),
                                 DropdownMenuItem(
-                                    child: Text("Woman"), value: "woman"),
+                                    child: Text(AppLocalizations.of(context)
+                                        .translate('edit_profile_transgender')),
+                                    value: "transgender"),
                                 DropdownMenuItem(
-                                    child: Text("Other"), value: "other"),
+                                    child: Text(AppLocalizations.of(context)
+                                        .translate('edit_profile_woman')),
+                                    value: "woman"),
+                                DropdownMenuItem(
+                                    child: Text(AppLocalizations.of(context)
+                                        .translate('edit_profile_other')),
+                                    value: "other"),
                               ],
                               onChanged: (val) {
                                 editInfo.addAll({'userGender': val});
@@ -584,12 +638,197 @@ class EditProfileState extends State<EditProfile> {
                             ),
                           ),
                         ),
+                        ListTile(
+                          title: Padding(
+                              padding: const EdgeInsets.only(bottom: 5.0),
+                              child: Text(
+                                "Instagram",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 16,
+                                    color: Colors.black87),
+                              )),
+                          subtitle: CupertinoTextField(
+                            controller: instagramCtlr,
+                            cursorColor: primaryColor,
+                            placeholder: "Instagram profile",
+                            padding: EdgeInsets.all(10),
+                            onChanged: (text) {
+                              bool _validURL = Uri.parse(text).isAbsolute;
+                              if (_validURL || text == "") {
+                                editInfo.addAll({'instagram_url': text});
+                              }
+                            },
+                          ),
+                        ),
+                        ListTile(
+                          title: Padding(
+                              padding: const EdgeInsets.only(bottom: 5.0),
+                              child: Text(
+                                "Facebook",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 16,
+                                    color: Colors.black87),
+                              )),
+                          subtitle: CupertinoTextField(
+                            controller: facebookCtlr,
+                            cursorColor: primaryColor,
+                            placeholder: "Facebook profile",
+                            padding: EdgeInsets.all(10),
+                            onChanged: (text) {
+                              bool _validURL = Uri.parse(text).isAbsolute;
+                              if (_validURL || text == "") {
+                                editInfo.addAll({'facebook_url': text});
+                              }
+                            },
+                          ),
+                        ),
+                        ListTile(
+                          title: Padding(
+                              padding: const EdgeInsets.only(bottom: 5.0),
+                              child: Text(
+                                "Tiktok",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 16,
+                                    color: Colors.black87),
+                              )),
+                          subtitle: CupertinoTextField(
+                            controller: tiktokCtlr,
+                            cursorColor: primaryColor,
+                            placeholder: "Tikok profile",
+                            padding: EdgeInsets.all(10),
+                            onChanged: (text) {
+                              bool _validURL = Uri.parse(text).isAbsolute;
+                              if (_validURL || text == "") {
+                                editInfo.addAll({'tiktok_url': text});
+                              }
+                            },
+                          ),
+                        ),
+                        ListTile(
+                          title: Padding(
+                              padding: const EdgeInsets.only(bottom: 5.0),
+                              child: Text(
+                                "Twitter",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 16,
+                                    color: Colors.black87),
+                              )),
+                          subtitle: CupertinoTextField(
+                            controller: twitterCtlr,
+                            cursorColor: primaryColor,
+                            placeholder: "Twitter profile",
+                            padding: EdgeInsets.all(10),
+                            onChanged: (text) {
+                              bool _validURL = Uri.parse(text).isAbsolute;
+                              if (_validURL || text == "") {
+                                editInfo.addAll({'twitter_url': text});
+                              }
+                            },
+                          ),
+                        ),
+                        ListTile(
+                          title: Padding(
+                              padding: const EdgeInsets.only(bottom: 5.0),
+                              child: Text(
+                                "Line",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 16,
+                                    color: Colors.black87),
+                              )),
+                          subtitle: CupertinoTextField(
+                            controller: lineCtlr,
+                            cursorColor: primaryColor,
+                            placeholder: "Line profile",
+                            padding: EdgeInsets.all(10),
+                            onChanged: (text) {
+                              bool _validURL = Uri.parse(text).isAbsolute;
+                              if (_validURL || text == "") {
+                                editInfo.addAll({'line_url': text});
+                              }
+                            },
+                          ),
+                        ),
+                        ListTile(
+                          title: Padding(
+                              padding: const EdgeInsets.only(bottom: 5.0),
+                              child: Text(
+                                "Whatsapp",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 16,
+                                    color: Colors.black87),
+                              )),
+                          subtitle: CupertinoTextField(
+                            controller: whatsappCtlr,
+                            cursorColor: primaryColor,
+                            placeholder: "Whatsapp number",
+                            padding: EdgeInsets.all(10),
+                            onChanged: (text) {
+                              bool _validURL = Uri.parse(text).isAbsolute;
+                              if (_validURL || text == "") {
+                                editInfo.addAll({'whatsapp_url': text});
+                              }
+                            },
+                          ),
+                        ),
+                        ListTile(
+                          title: Padding(
+                              padding: const EdgeInsets.only(bottom: 5.0),
+                              child: Text(
+                                "Snapchat",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 16,
+                                    color: Colors.black87),
+                              )),
+                          subtitle: CupertinoTextField(
+                            controller: snapchatCtlr,
+                            cursorColor: primaryColor,
+                            placeholder: "Snapchat profile",
+                            padding: EdgeInsets.all(10),
+                            onChanged: (text) {
+                              bool _validURL = Uri.parse(text).isAbsolute;
+                              if (_validURL || text == "") {
+                                editInfo.addAll({'snapchat_url': text});
+                              }
+                            },
+                          ),
+                        ),
+                        ListTile(
+                          title: Padding(
+                              padding: const EdgeInsets.only(bottom: 5.0),
+                              child: Text(
+                                "WeChat",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 16,
+                                    color: Colors.black87),
+                              )),
+                          subtitle: CupertinoTextField(
+                            controller: wechatCtlr,
+                            cursorColor: primaryColor,
+                            placeholder: "WeChat profile",
+                            padding: EdgeInsets.all(10),
+                            onChanged: (text) {
+                              bool _validURL = Uri.parse(text).isAbsolute;
+                              if (_validURL || text == "") {
+                                editInfo.addAll({'wechat_url': text});
+                              }
+                            },
+                          ),
+                        ),
                         SizedBox(
                           height: 10,
                         ),
                         ListTile(
                             title: Text(
-                              "Control your profile",
+                              AppLocalizations.of(context)
+                                  .translate('edit_profile_control'),
                               style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   fontSize: 16,
@@ -607,7 +846,9 @@ class EditProfileState extends State<EditProfile> {
                                     children: <Widget>[
                                       Padding(
                                         padding: const EdgeInsets.all(8.0),
-                                        child: Text("Don't Show My Age"),
+                                        child: Text(AppLocalizations.of(context)
+                                            .translate(
+                                                'edit_profile_dont_show_age')),
                                       ),
                                       Switch(
                                           activeColor: primaryColor,
@@ -627,7 +868,9 @@ class EditProfileState extends State<EditProfile> {
                                     children: <Widget>[
                                       Padding(
                                         padding: const EdgeInsets.all(8.0),
-                                        child: Text("Make My Distance Visible"),
+                                        child: Text(AppLocalizations.of(context)
+                                            .translate(
+                                                'edit_profile_make_visible_distance')),
                                       ),
                                       Switch(
                                           activeColor: primaryColor,
