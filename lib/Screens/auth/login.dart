@@ -14,7 +14,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 
 class Login extends StatelessWidget {
-  static const your_client_id = '4159413450744988';
+  static const your_client_id = '498640681315877';
   final FirebaseAuth _auth = FirebaseAuth.instance;
   static const your_redirect_url =
       'https://mantis-social.firebaseapp.com/__/auth/handler';
@@ -94,7 +94,7 @@ class Login extends StatelessWidget {
               ),
               Column(children: <Widget>[
                 SizedBox(
-                  height: MediaQuery.of(context).size.height * .1,
+                  height: MediaQuery.of(context).size.height * .05,
                 ),
                 Container(
                   child: Text(
