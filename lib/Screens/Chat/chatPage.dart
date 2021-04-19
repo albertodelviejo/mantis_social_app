@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import '../../app_localizations.dart';
 import 'largeImage.dart';
 import '../Information.dart';
@@ -36,12 +37,13 @@ class _ChatPageState extends State<ChatPage> {
   bool _isWritting = false;
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   Ads _ads = new Ads();
+  InterstitialAd _interstitialAd;
 
   @override
   void initState() {
-    _ads.myInterstitial()
-      ..load()
-      ..show();
+    _interstitialAd = _ads.myInterstitial();
+    _interstitialAd.load();
+    //..show();
     print("object    -${widget.chatId}");
     super.initState();
     chatReference =
@@ -407,6 +409,11 @@ class _ChatPageState extends State<ChatPage> {
 
   @override
   Widget build(BuildContext context) {
+    _interstitialAd.isLoaded().whenComplete(() {
+      setState(() {
+        _interstitialAd.show();
+      });
+    });
     return Scaffold(
       key: _scaffoldKey,
       backgroundColor: Colors.white,

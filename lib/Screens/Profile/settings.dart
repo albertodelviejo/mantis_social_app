@@ -63,6 +63,7 @@ class _SettingsState extends State<Settings> {
     _ad = _ads.myBanner();
     super.initState();
     _ad..load();
+
     //..show();
     freeR = widget.items['free_radius'] != null
         ? int.parse(widget.items['free_radius'])
@@ -513,7 +514,8 @@ class _SettingsState extends State<Settings> {
                         child: Padding(
                           padding: const EdgeInsets.all(18.0),
                           child: Text(
-                            "Logout",
+                            AppLocalizations.of(context)
+                                .translate('settings_logout'),
                             style: TextStyle(
                                 fontSize: 15, fontWeight: FontWeight.w500),
                           ),

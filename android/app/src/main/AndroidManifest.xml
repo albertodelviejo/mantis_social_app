@@ -46,9 +46,9 @@
             </intent-filter>
             <!--For remove the 'jump' of a centered graphic on the launch screen
              https://github.com/flutter/flutter/issues/47634 -->
-            <!--<meta-data
+            <meta-data
                 android:name="io.flutter.embedding.android.SplashScreenDrawable"
-                android:resource="@drawable/launch_background" />-->
+                android:resource="@drawable/launch_background" />
         </activity>
          <activity
     android:name="com.yalantis.ucrop.UCropActivity"
@@ -64,7 +64,7 @@
             android:value="default_notification_channel_id"/>
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-4953666659576409~6645357645ad"/>
+            android:value="ca-app-pub-4953666659576409~6645357645"/>
          </application>
 
 <uses-permission android:name="com.android.vending.BILLING" />        

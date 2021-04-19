@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mantissocial/util/university_suggestions_th.dart';
 import '../app_localizations.dart';
 import '../util/university_suggestions_en.dart';
 import '../util/color.dart';
@@ -69,7 +70,10 @@ class _UniversityState extends State<University> {
                 child: Container(
                   child: SimpleAutoCompleteTextField(
                     key: key,
-                    suggestions: suggestions,
+                    suggestions:
+                        AppLocalizations.of(context).locale.languageCode == 'th'
+                            ? suggestionsthai
+                            : suggestions,
                     controller: textEditingController,
                     style: TextStyle(fontSize: 23),
                     decoration: InputDecoration(

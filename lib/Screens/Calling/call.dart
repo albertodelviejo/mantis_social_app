@@ -184,58 +184,61 @@ class _CallPageState extends State<CallPage> {
     return Container(
       alignment: Alignment.bottomCenter,
       padding: const EdgeInsets.symmetric(vertical: 48),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          RawMaterialButton(
-            onPressed: _onToggleMute,
-            child: Icon(
-              muted ? Icons.mic_off : Icons.mic,
-              color: muted ? Colors.white : primaryColor,
-              size: 20.0,
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            RawMaterialButton(
+              onPressed: _onToggleMute,
+              child: Icon(
+                muted ? Icons.mic_off : Icons.mic,
+                color: muted ? Colors.white : primaryColor,
+                size: 20.0,
+              ),
+              shape: CircleBorder(),
+              elevation: 2.0,
+              fillColor: muted ? primaryColor : Colors.white,
+              padding: const EdgeInsets.all(12.0),
             ),
-            shape: CircleBorder(),
-            elevation: 2.0,
-            fillColor: muted ? primaryColor : Colors.white,
-            padding: const EdgeInsets.all(12.0),
-          ),
-          RawMaterialButton(
-            onPressed: () => _onCallEnd(context),
-            child: Icon(
-              Icons.call_end,
-              color: Colors.white,
-              size: 35.0,
+            RawMaterialButton(
+              onPressed: () => _onCallEnd(context),
+              child: Icon(
+                Icons.call_end,
+                color: Colors.white,
+                size: 35.0,
+              ),
+              shape: CircleBorder(),
+              elevation: 2.0,
+              fillColor: Colors.redAccent,
+              padding: const EdgeInsets.all(15.0),
             ),
-            shape: CircleBorder(),
-            elevation: 2.0,
-            fillColor: Colors.redAccent,
-            padding: const EdgeInsets.all(15.0),
-          ),
-          RawMaterialButton(
-            onPressed: _onSwitchCamera,
-            child: Icon(
-              Icons.switch_camera,
-              color: primaryColor,
-              size: 20.0,
+            RawMaterialButton(
+              onPressed: _onSwitchCamera,
+              child: Icon(
+                Icons.switch_camera,
+                color: primaryColor,
+                size: 20.0,
+              ),
+              shape: CircleBorder(),
+              elevation: 2.0,
+              fillColor: Colors.white,
+              padding: const EdgeInsets.all(12.0),
             ),
-            shape: CircleBorder(),
-            elevation: 2.0,
-            fillColor: Colors.white,
-            padding: const EdgeInsets.all(12.0),
-          ),
-          RawMaterialButton(
-            onPressed: _disVideo,
-            child: Icon(
-              disable ? Icons.videocam : Icons.videocam_off,
-              color: disable ? primaryColor : Colors.white,
-              size: 20.0,
-            ),
-            shape: CircleBorder(),
-            elevation: 2.0,
-            fillColor: !disable ? primaryColor : Colors.white,
-            padding: const EdgeInsets.all(12.0),
-          )
-        ],
+            RawMaterialButton(
+              onPressed: _disVideo,
+              child: Icon(
+                disable ? Icons.videocam : Icons.videocam_off,
+                color: disable ? primaryColor : Colors.white,
+                size: 20.0,
+              ),
+              shape: CircleBorder(),
+              elevation: 2.0,
+              fillColor: !disable ? primaryColor : Colors.white,
+              padding: const EdgeInsets.all(12.0),
+            )
+          ],
+        ),
       ),
     );
   }
@@ -278,6 +281,7 @@ class _CallPageState extends State<CallPage> {
   }
 
   void _onCallEnd(BuildContext context) {
+    dispose();
     Navigator.pop(context);
   }
 

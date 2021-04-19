@@ -28,14 +28,14 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>com.googleusercontent.apps.*************5col</string>
-				<string>fb4159413450744988</string>
+				<string>fb498640681315877</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>FacebookAppID</key>
-	<string>4159413450744988</string>
+	<string>498640681315877</string>
 	<key>FacebookDisplayName</key>
 	<string>Mantis Social</string>
 	<key>LSApplicationCategoryType</key>
@@ -93,7 +93,7 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 	<key>GADApplicationIdentifier</key>
-			<string>ca-app-pub-0000000000000000~0000000000</string>
+			<string>ca-app-pub-4953666659576409~5846022112</string>
 		
 </dict>
 </plist>

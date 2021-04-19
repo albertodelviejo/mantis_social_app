@@ -3,11 +3,11 @@
     <string name="app_name">MantisSocial</string>
 
     <!-- Replace "000000000000" with your Facebook App ID here. -->
-    <string name="facebook_app_id">4159413450744988</string>
+    <string name="facebook_app_id">498640681315877</string>
 
     <!--
       Replace "000000000000" with your Facebook App ID here.
       **NOTE**: The scheme needs to start with `fb` and then your ID.
     -->
-    <string name="fb_login_protocol_scheme">fb4159413450744988</string>
+    <string name="fb_login_protocol_scheme">fb498640681315877</string>
 </resources>
