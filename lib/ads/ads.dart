@@ -37,6 +37,7 @@ class Ads {
           onAdClosed: (Ad ad) => print("BannerAd event is closed"),
         ),
       );
+
   InterstitialAd myInterstitial() => InterstitialAd(
       adUnitId: Platform.isAndroid
           ? androidInterstitialAdUnitId

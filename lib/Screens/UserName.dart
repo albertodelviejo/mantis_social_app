@@ -22,7 +22,7 @@ class _UserNameState extends State<UserName> {
   void initState() {
     ad1 = ads.myBanner();
     super.initState();
-    ad1..load();
+    ad1.load();
     /*
       ..show(
         anchorOffset: 180.0,

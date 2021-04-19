@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import '../app_localizations.dart';
 import 'Information.dart';
 import 'Payment/subscriptions.dart';
@@ -32,6 +33,7 @@ class _CardPicturesState extends State<CardPictures>
   // TabbarState state = TabbarState();
   bool onEnd = false;
   Ads _ads = new Ads();
+  InterstitialAd _interstitialAd;
 
   GlobalKey<SwipeStackState> swipeKey = GlobalKey<SwipeStackState>();
   @override
@@ -252,10 +254,14 @@ class _CardPicturesState extends State<CardPictures>
                                                       alignment:
                                                           Alignment.bottomLeft,
                                                       child: ListTile(
-                                                          onTap: () {
-                                                            _ads.myInterstitial()
-                                                              ..load()
-                                                              ..show();
+                                                          onTap: () async {
+                                                            _interstitialAd = _ads
+                                                                .myInterstitial();
+                                                            await _interstitialAd
+                                                                .load();
+                                                            //..load()
+                                                            _interstitialAd
+                                                                .show();
                                                             showDialog(
                                                                 barrierDismissible:
                                                                     false,
@@ -593,12 +599,12 @@ class _CardPicturesState extends State<CardPictures>
     );
   }
 
-  void _adsCheck(count) {
+  Future<void> _adsCheck(count) async {
     print(count);
     if (count % 5 == 0) {
-      _ads.myInterstitial()
-        ..load()
-        ..show();
+      await _ads.myInterstitial().load();
+      //..load()
+      _ads.myInterstitial().show();
       countswipe++;
     } else {
       countswipe++;

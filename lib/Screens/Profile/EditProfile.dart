@@ -66,7 +66,7 @@ class EditProfileState extends State<EditProfile> {
     });
     _ad = _ads.myBanner();
     super.initState();
-    _ad..load();
+    _ad.load();
   }
 
   @override

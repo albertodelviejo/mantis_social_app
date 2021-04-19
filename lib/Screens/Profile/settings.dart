@@ -63,6 +63,7 @@ class _SettingsState extends State<Settings> {
     _ad = _ads.myBanner();
     super.initState();
     _ad..load();
+
     //..show();
     freeR = widget.items['free_radius'] != null
         ? int.parse(widget.items['free_radius'])
