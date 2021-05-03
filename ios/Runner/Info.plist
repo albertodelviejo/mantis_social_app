@@ -25,7 +25,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.*************5col</string>
+				<string>com.googleusercontent.apps.385693547865-dt94eo3mdg1ti199m0q6kmurvptkc18v</string>
 				<string>fb498640681315877</string>
 			</array>
 		</dict>
@@ -36,8 +36,10 @@
 	<string>498640681315877</string>
 	<key>FacebookDisplayName</key>
 	<string>Mantis Social</string>
+	<key>GADApplicationIdentifier</key>
+	<string>ca-app-pub-4953666659576409~5846022112</string>
 	<key>LSApplicationCategoryType</key>
-	<string>The iOS Simulator deployment target &apos;IPHONEOS_DEPLOYMENT_TARGET&apos; is set to 7.0, but the range of supported deployment target versions is 8.0 to 13.2.99.</string>
+	<string>The iOS Simulator deployment target 'IPHONEOS_DEPLOYMENT_TARGET' is set to 7.0, but the range of supported deployment target versions is 8.0 to 13.2.99.</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppleMusicUsageDescription</key>
@@ -86,12 +88,9 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>io.flutter.embedded_views_preview</key>
-	<true/>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>GADApplicationIdentifier</key>
-			<string>ca-app-pub-4953666659576409~5846022112</string>
-		
+	<key>io.flutter.embedded_views_preview</key>
+	<true/>
 </dict>
 </plist>
