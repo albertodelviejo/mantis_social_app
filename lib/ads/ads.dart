@@ -22,13 +22,13 @@ class Ads {
     nonPersonalizedAds: true,
     testDevices: testDevice != null
         ? <String>[testDevice]
-        : null, // Android emulators are considered test devices
+        : null, // Android emulators are considered test devicess
   );
 
   BannerAd myBanner() => BannerAd(
         adUnitId: Platform.isIOS ? iosBannerAdUnitId : androidBannerAdUnitId,
         request: request,
-        size: AdSize.smartBanner,
+        size: AdSize.banner,
 
         //targetingInfo: targetingInfo(),
         listener: AdListener(

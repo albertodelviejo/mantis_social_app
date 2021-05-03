@@ -38,7 +38,7 @@ class _SettingsState extends State<Settings> {
   FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
   @override
   void dispose() {
-    if (!Platform.isIOS) _ads.disable(_ad);
+    _ads.disable(_ad);
 
     // _ad?.dispose();
     super.dispose();
@@ -62,11 +62,10 @@ class _SettingsState extends State<Settings> {
 
   @override
   void initState() {
-    if (!Platform.isIOS) {
+    
       _ad = _ads.myBanner();
       super.initState();
       _ad..load();
-    }
 
     //..show();
     freeR = widget.items['free_radius'] != null
@@ -162,7 +161,7 @@ class _SettingsState extends State<Settings> {
                             CupertinoPageRoute(
                                 builder: (context) =>
                                     UpdateNumber(widget.currentUser)));
-                        if (!Platform.isIOS) _ads.disable(_ad);
+                        _ads.disable(_ad);
                       },
                     ),
                   )),
@@ -551,7 +550,7 @@ class _SettingsState extends State<Settings> {
                                           builder: (context) => Login()),
                                     );
                                   });
-                                  if (!Platform.isIOS) _ads.disable(_ad);
+                                 _ads.disable(_ad);
                                 },
                                 child: Text('Yes'),
                               ),
@@ -607,7 +606,7 @@ class _SettingsState extends State<Settings> {
                                             builder: (context) => Login()),
                                       );
                                     });
-                                    if (!Platform.isIOS) _ads.disable(_ad);
+                                    _ads.disable(_ad);
                                   });
                                 },
                                 child: Text('Yes'),

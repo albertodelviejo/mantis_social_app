@@ -51,7 +51,7 @@ class _MyAppState extends State<MyApp> {
   Future _checkAuth() async {
     final FirebaseAuth _auth = FirebaseAuth.instance;
     User user = _auth.currentUser;
-    print(user);
+    //print(user);
     if (user != null) {
       await FirebaseFirestore.instance
           .collection('Users')
