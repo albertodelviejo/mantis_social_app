@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -36,7 +38,7 @@ class _SettingsState extends State<Settings> {
   FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
   @override
   void dispose() {
-    _ads.disable(_ad);
+    if (!Platform.isIOS) _ads.disable(_ad);
 
     // _ad?.dispose();
     super.dispose();
@@ -60,9 +62,11 @@ class _SettingsState extends State<Settings> {
 
   @override
   void initState() {
-    _ad = _ads.myBanner();
-    super.initState();
-    _ad..load();
+    if (!Platform.isIOS) {
+      _ad = _ads.myBanner();
+      super.initState();
+      _ad..load();
+    }
 
     //..show();
     freeR = widget.items['free_radius'] != null
@@ -158,7 +162,7 @@ class _SettingsState extends State<Settings> {
                             CupertinoPageRoute(
                                 builder: (context) =>
                                     UpdateNumber(widget.currentUser)));
-                        _ads.disable(_ad);
+                        if (!Platform.isIOS) _ads.disable(_ad);
                       },
                     ),
                   )),
@@ -547,7 +551,7 @@ class _SettingsState extends State<Settings> {
                                           builder: (context) => Login()),
                                     );
                                   });
-                                  _ads.disable(_ad);
+                                  if (!Platform.isIOS) _ads.disable(_ad);
                                 },
                                 child: Text('Yes'),
                               ),
@@ -603,7 +607,7 @@ class _SettingsState extends State<Settings> {
                                             builder: (context) => Login()),
                                       );
                                     });
-                                    _ads.disable(_ad);
+                                    if (!Platform.isIOS) _ads.disable(_ad);
                                   });
                                 },
                                 child: Text('Yes'),
