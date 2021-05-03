@@ -1,7 +1,7 @@
 name: mantissocial
 description: A new Flutter application.
 
-version: 1.0.2+2
+version: 1.0.3+3
 
 environment:
   sdk: ">=2.2.0 <3.0.0"

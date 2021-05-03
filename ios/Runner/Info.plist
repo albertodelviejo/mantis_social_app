@@ -20,8 +20,6 @@
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
 	<array>
-		
-			
 		<dict>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
