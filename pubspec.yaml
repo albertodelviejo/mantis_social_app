@@ -1,7 +1,7 @@
 name: mantissocial
 description: A new Flutter application.
 
-version: 1.0.3+3
+version: 1.0.5+5
 
 environment:
   sdk: ">=2.2.0 <3.0.0"
@@ -21,7 +21,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   firebase_auth: ^1.0.3
   firebase_core: ^1.0.3
-  firebase_messaging: ^9.1.1
+  firebase_messaging: ^9.1.3
   firebase_storage: ^8.0.3
   flutter_facebook_login: ^3.0.0
   flutter_local_notifications: ^5.0.0+1

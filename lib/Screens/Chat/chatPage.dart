@@ -427,11 +427,13 @@ class _ChatPageState extends State<ChatPage> {
             onPressed: () => Navigator.pop(context),
           ),
           actions: <Widget>[
+            /*
             IconButton(
                 icon: Icon(Icons.call), onPressed: () => onJoin("AudioCall")),
             IconButton(
                 icon: Icon(Icons.video_call),
                 onPressed: () => onJoin("VideoCall")),
+                */
             PopupMenuButton(itemBuilder: (ct) {
               return [
                 PopupMenuItem(
